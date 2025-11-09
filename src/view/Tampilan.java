@@ -7,7 +7,7 @@ public class Tampilan {
 
     public void menuUtama() {
         System.out.println("\n===== SISTEM PEMESANAN TIKET TRANSPORTASI =====");
-        System.out.println("1. Lihat semua penerbangan (urutan berdasarkan tanggal)");
+        System.out.println("1. Lihat semua penerbangan (urutan berdasarkan tanggal, bulan dan tahun keberangkatan)");
         System.out.println("2. Cari penerbangan");
         System.out.println("3. Tambah penerbangan");
         System.out.println("4. Edit penerbangan");

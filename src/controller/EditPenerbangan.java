@@ -9,7 +9,7 @@ public class EditPenerbangan {
         this.sistem = sistem;
     }
 
-    public void jalankan() {
+    public void run() {
         System.out.print("Masukkan ID penerbangan yang akan diedit: ");
         int id = Integer.parseInt(sistem.input.nextLine());
         Penerbangan p = sistem.cariById(id);

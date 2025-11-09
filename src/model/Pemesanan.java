@@ -1,8 +1,5 @@
 package model;
-
-import java.text.DecimalFormat;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class Pemesanan {
     public int idPemesanan;
@@ -21,42 +18,78 @@ public class Pemesanan {
         this.waktuPesan = waktuPesan;
     }
 
-    private String namaBulan(int bulan) {
-        return switch (bulan) {
-            case 1 -> "Januari";
-            case 2 -> "Februari";
-            case 3 -> "Maret";
-            case 4 -> "April";
-            case 5 -> "Mei";
-            case 6 -> "Juni";
-            case 7 -> "Juli";
-            case 8 -> "Agustus";
-            case 9 -> "September";
-            case 10 -> "Oktober";
-            case 11 -> "November";
-            case 12 -> "Desember";
-            default -> "Bulan tidak valid";
-        };
+    public String getNamaBulan(int bulan) {
+        String nama = "";
+        switch (bulan) {
+            case 1:
+                nama = "Januari";
+                break;
+            case 2:
+                nama = "Februari";
+                break;
+            case 3:
+                nama = "Maret";
+                break;
+            case 4:
+                nama = "April";
+                break;
+            case 5:
+                nama = "Mei";
+                break;
+            case 6:
+                nama = "Juni";
+                break;
+            case 7:
+                nama = "Juli";
+                break;
+            case 8:
+                nama = "Agustus";
+                break;
+            case 9:
+                nama = "September";
+                break;
+            case 10:
+                nama = "Oktober";
+                break;
+            case 11:
+                nama = "November";
+                break;
+            case 12:
+                nama = "Desember";
+                break;
+            default:
+                nama = "Bulan tidak valid";
+                break;
+        }
+        return nama;
     }
 
     public String ringkasan(Penerbangan penerbangan) {
-        String infoPenerbangan;
+        String infoPenerbangan = "";
 
         if (penerbangan != null) {
-            String namaBulan = namaBulan(penerbangan.bulan);
-            infoPenerbangan = penerbangan.pesawat + " " + penerbangan.asal + " -> " + penerbangan.tujuan + " (" + (penerbangan.hari < 10 ? "0" + penerbangan.hari : penerbangan.hari) + " " + namaBulan + " " + penerbangan.tahun + ")";
+            String namaBulan = getNamaBulan(penerbangan.bulan);
+            infoPenerbangan = penerbangan.pesawat + " "
+                    + penerbangan.asal + " -> "
+                    + penerbangan.tujuan + " ("
+                    + penerbangan.hari + " "
+                    + namaBulan + " "
+                    + penerbangan.tahun + ")";
         } else {
             infoPenerbangan = "Penerbangan sudah dihapus";
         }
 
-        DateTimeFormatter formatTanggal = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        DecimalFormat df = new DecimalFormat("#,###");
+        String waktu = waktuPesan.getYear() + "-"
+                + waktuPesan.getMonthValue() + "-"
+                + waktuPesan.getDayOfMonth() + " "
+                + waktuPesan.getHour() + ":"
+                + waktuPesan.getMinute();
 
-        return "ID pesanan #" + idPemesanan +
-                " | Nama: " + namaPelanggan +
-                " | " + infoPenerbangan +
-                " | Jumlah: " + jumlah +
-                " | Total: Rp" + df.format(totalHarga) +
-                " | Waktu pemesanan: " + waktuPesan.format(formatTanggal);
+        return "ID Pesanan #" + idPemesanan
+                + " | Nama: " + namaPelanggan
+                + " | " + infoPenerbangan
+                + " | Jumlah: " + jumlah
+                + " | Total: Rp" + (int) totalHarga
+                + " | Waktu Pesan: " + waktu;
     }
 }

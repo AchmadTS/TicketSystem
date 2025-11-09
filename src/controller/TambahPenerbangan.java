@@ -7,7 +7,7 @@ public class TambahPenerbangan {
         this.sistem = sistem;
     }
 
-    public void jalankan() {
+    public void run() {
         System.out.print("Nama pesawat: ");
         String pesawat = sistem.input.nextLine();
         System.out.print("Asal: ");

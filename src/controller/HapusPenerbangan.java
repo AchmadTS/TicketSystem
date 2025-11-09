@@ -7,7 +7,7 @@ public class HapusPenerbangan {
         this.sistem = sistem;
     }
 
-    public void jalankan() {
+    public void run() {
         System.out.print("Masukkan ID penerbangan: ");
         int id = Integer.parseInt(sistem.input.nextLine());
         int idx = -1;

@@ -11,9 +11,9 @@ public class PesanTiket {
         this.sistem = sistem;
     }
 
-    public void jalankan() {
+    public void run() {
         sistem.view.showDaftarPenerbangan(sistem.daftarPenerbangan, sistem.jumlahPenerbangan);
-        System.out.print("\nMasukkan ID penerbangan: ");
+        System.out.print("Masukkan ID penerbangan: ");
         int id = Integer.parseInt(sistem.input.nextLine());
         Penerbangan p = sistem.cariById(id);
 
@@ -34,9 +34,9 @@ public class PesanTiket {
 
         p.jumlahKursi -= jumlah;
         double total = jumlah * p.harga;
-        sistem.daftarPemesanan[sistem.jumlahPemesanan++] =
-                new Pemesanan(sistem.nextIdPemesanan++, p.id, nama, jumlah, total, LocalDateTime.now());
+        sistem.daftarPemesanan[sistem.jumlahPemesanan++] = new Pemesanan(sistem.nextIdPemesanan++, p.id, nama, jumlah, total, LocalDateTime.now());
 
-        System.out.printf("✅ Pemesanan berhasil! Total: Rp%,.0f\n", total);
+        System.out.printf("✅ Pemesanan berhasil! Total: Rp%,.0f", total);
+        System.out.println();
     }
 }
