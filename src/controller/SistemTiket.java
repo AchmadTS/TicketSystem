@@ -21,7 +21,7 @@ public class SistemTiket {
         daftarPenerbangan[jumlahPenerbangan++] = new Penerbangan(nextIdPenerbangan++, "Batik 303", "Bandung", "Jakarta", 300000, 11, 9, 2025, 80);
     }
 
-    public void mulai() {
+    public void mainMenu() {
         while (true) {
             view.menuUtama();
             String pilih = input.nextLine();
