@@ -6,7 +6,8 @@ import model.Pemesanan;
 public class Tampilan {
 
     public void menuUtama() {
-        System.out.println("\n===== SISTEM PEMESANAN TIKET TRANSPORTASI =====");
+        System.out.println();
+        System.out.println("===== SISTEM PEMESANAN TIKET TRANSPORTASI =====");
         System.out.println("1. Lihat semua penerbangan (urutan berdasarkan tanggal, bulan dan tahun keberangkatan)");
         System.out.println("2. Cari penerbangan");
         System.out.println("3. Tambah penerbangan");
@@ -23,7 +24,8 @@ public class Tampilan {
             System.out.println("Belum ada penerbangan.");
             return;
         }
-        System.out.println("\n--- Daftar Penerbangan ---");
+        System.out.println();
+        System.out.println("--- Daftar Penerbangan ---");
         for (int i = 0; i < jumlah; i++) {
             System.out.println(daftar[i]);
         }
@@ -34,7 +36,8 @@ public class Tampilan {
             System.out.println("Belum ada pemesanan.");
             return;
         }
-        System.out.println("\n--- Riwayat Pemesanan ---");
+        System.out.println();
+        System.out.println("--- Riwayat Pemesanan ---");
         for (int i = 0; i < jumlahPesan; i++) {
             Pemesanan pem = daftar[i];
             Penerbangan p = null;

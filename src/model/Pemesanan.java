@@ -1,4 +1,5 @@
 package model;
+import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 
 public class Pemesanan {
@@ -85,11 +86,12 @@ public class Pemesanan {
                 + waktuPesan.getHour() + ":"
                 + waktuPesan.getMinute();
 
+        DecimalFormat df = new DecimalFormat("#,###");
         return "ID Pesanan #" + idPemesanan
                 + " | Nama: " + namaPelanggan
                 + " | " + infoPenerbangan
                 + " | Jumlah: " + jumlah
-                + " | Total: Rp" + (int) totalHarga
+                + " | Total: Rp" + df.format(totalHarga)
                 + " | Waktu Pesan: " + waktu;
     }
 }
