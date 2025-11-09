@@ -155,15 +155,7 @@ public class SistemTiket {
         boolean ketemu = false;
         for (int i = 0; i < jumlahPenerbangan; i++) {
             Penerbangan p = daftarPenerbangan[i];
-            if (p.asal.equalsIgnoreCase(asal) &&
-                    p.tujuan.equalsIgnoreCase(tujuan) &&
-                    p.hari == hari && p.bulan == bulan && p.tahun == tahun) {
-
-                if (!ketemu) {
-                    System.out.println();
-                    System.out.println("Hasil pencarian:");
-                }
-
+            if (p.asal.equalsIgnoreCase(asal) && p.tujuan.equalsIgnoreCase(tujuan) && p.hari == hari && p.bulan == bulan && p.tahun == tahun) {
                 System.out.println(p);
                 ketemu = true;
             }

@@ -37,7 +37,8 @@ public class Penerbangan {
 
         public void run() {
             sistem.view.showDaftarPenerbangan(sistem.daftarPenerbangan, sistem.jumlahPenerbangan);
-            System.out.print("\nMasukkan ID penerbangan: ");
+            System.out.println();
+            System.out.print("Masukkan ID penerbangan: ");
             int id = Integer.parseInt(sistem.input.nextLine());
             Penerbangan p = sistem.cariById(id);
 
