@@ -21,49 +21,49 @@ public class Pemesanan {
     }
 
     public String getNamaBulan(int bulan) {
-        String nama = "";
+        String namaBulan = "";
         switch (bulan) {
             case 1:
-                nama = "Januari";
+                namaBulan = "Januari";
                 break;
             case 2:
-                nama = "Februari";
+                namaBulan = "Februari";
                 break;
             case 3:
-                nama = "Maret";
+                namaBulan = "Maret";
                 break;
             case 4:
-                nama = "April";
+                namaBulan = "April";
                 break;
             case 5:
-                nama = "Mei";
+                namaBulan = "Mei";
                 break;
             case 6:
-                nama = "Juni";
+                namaBulan = "Juni";
                 break;
             case 7:
-                nama = "Juli";
+                namaBulan = "Juli";
                 break;
             case 8:
-                nama = "Agustus";
+                namaBulan = "Agustus";
                 break;
             case 9:
-                nama = "September";
+                namaBulan = "September";
                 break;
             case 10:
-                nama = "Oktober";
+                namaBulan = "Oktober";
                 break;
             case 11:
-                nama = "November";
+                namaBulan = "November";
                 break;
             case 12:
-                nama = "Desember";
+                namaBulan = "Desember";
                 break;
             default:
-                nama = "Bulan tidak valid";
+                namaBulan = "Bulan tidak valid";
                 break;
         }
-        return nama;
+        return namaBulan;
     }
 
     public String ringkasan(Penerbangan penerbangan) {

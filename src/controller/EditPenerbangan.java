@@ -57,6 +57,33 @@ public class EditPenerbangan {
             if (p == null) {
                 System.out.println("❌ ID penerbangan tidak ada! Silakan coba lagi");
             }
+
+            int jumlahPemesananTerkait = 0;
+            for (int i = 0; i < sistem.jumlahPemesanan; i++) {
+                if (sistem.daftarPemesanan[i].idPenerbangan == p.id) {
+                    jumlahPemesananTerkait++;
+                }
+            }
+
+            if (jumlahPemesananTerkait > 0) {
+                System.out.println("\n⚠️ PERINGATAN: Ada " + jumlahPemesananTerkait + " pemesanan terkait penerbangan ini!");
+                System.out.println("Mengubah data penerbangan akan mempengaruhi pemesanan yang sudah ada.");
+
+                boolean konfirmasiValid = false;
+                while (!konfirmasiValid) {
+                    System.out.print("Lanjutkan edit? (y/n): ");
+                    String konfirmasi = sistem.input.nextLine().trim().toLowerCase();
+
+                    if (konfirmasi.equals("y")) {
+                        konfirmasiValid = true;
+                    } else if (konfirmasi.equals("n")) {
+                        System.out.println("❌ Edit dibatalkan.");
+                        return;
+                    } else {
+                        System.out.println("❌ Input tidak valid! Masukkan 'y' atau 'n'.");
+                    }
+                }
+            }
         }
 
         System.out.println("\n📋 Data saat ini:");
