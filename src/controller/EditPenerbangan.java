@@ -186,7 +186,7 @@ public class EditPenerbangan {
             boolean valid = false;
 
             while (!valid) {
-                System.out.print("Masukkan waktu baru (contoh: 29 februari 2024): ");
+                System.out.print("Masukkan waktu baru (contoh: 28 februari 2024): ");
                 String[] waktu = sistem.input.nextLine().split(" ");
 
                 boolean inputBenar = true;

@@ -90,7 +90,8 @@ public class TambahPenerbangan {
                 inputBenar = false;
             } else {
                 String strHari = waktu[0];
-                String namaBulan = waktu[1].toLowerCase();
+                String namaBulanAsli = waktu[1];
+                String namaBulan = namaBulanAsli.toLowerCase();
                 String strTahun = waktu[2];
 
                 for (char c : strHari.toCharArray()) {
@@ -165,7 +166,7 @@ public class TambahPenerbangan {
                         }
 
                         if (hari < 1 || hari > maxHari) {
-                            System.out.println("❌ Tanggal tidak valid untuk bulan yang dipilih!");
+                            System.out.println("❌ Tanggal tidak valid untuk bulan " + namaBulanAsli + "!");
                             inputBenar = false;
                         }
                     }
