@@ -1,4 +1,5 @@
 package model;
+
 import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 
@@ -81,10 +82,10 @@ public class Pemesanan {
         }
 
         String waktu = waktuPesan.getYear() + "-"
-                + waktuPesan.getMonthValue() + "-"
-                + waktuPesan.getDayOfMonth() + " "
-                + waktuPesan.getHour() + ":"
-                + waktuPesan.getMinute();
+                + (waktuPesan.getMonthValue() < 10 ? "0" : "") + waktuPesan.getMonthValue() + "-"
+                + (waktuPesan.getDayOfMonth() < 10 ? "0" : "") + waktuPesan.getDayOfMonth() + " "
+                + (waktuPesan.getHour() < 10 ? "0" : "") + waktuPesan.getHour() + ":"
+                + (waktuPesan.getMinute() < 10 ? "0" : "") + waktuPesan.getMinute();
 
         DecimalFormat df = new DecimalFormat("#,###");
         return "ID Pesanan #" + idPemesanan

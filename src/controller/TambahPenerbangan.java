@@ -8,23 +8,80 @@ public class TambahPenerbangan {
     }
 
     public void run() {
-        System.out.print("Nama pesawat: ");
-        String pesawat = sistem.input.nextLine();
+        System.out.println("\n=== TAMBAH PENERBANGAN BARU ===\n");
 
-        System.out.print("Asal: ");
-        String asal = sistem.input.nextLine();
+        String pesawat = "";
+        while (pesawat.isEmpty()) {
+            System.out.print("Nama pesawat: ");
+            pesawat = sistem.input.nextLine().trim();
+            if (pesawat.isEmpty()) {
+                System.out.println("❌ Nama pesawat tidak boleh kosong!");
+            }
+        }
 
-        System.out.print("Tujuan: ");
-        String tujuan = sistem.input.nextLine();
+        String asal = "";
+        while (asal.isEmpty()) {
+            System.out.print("Asal: ");
+            asal = sistem.input.nextLine().trim();
+            if (asal.isEmpty()) {
+                System.out.println("❌ Kota asal tidak boleh kosong!");
+            }
+        }
 
-        System.out.print("Harga: ");
-        double harga = Double.parseDouble(sistem.input.nextLine());
+        String tujuan = "";
+        while (tujuan.isEmpty()) {
+            System.out.print("Tujuan: ");
+            tujuan = sistem.input.nextLine().trim();
+            if (tujuan.isEmpty()) {
+                System.out.println("❌ Kota tujuan tidak boleh kosong!");
+            }
+        }
+
+        double harga = 0;
+        boolean hargaValid = false;
+        while (!hargaValid) {
+            System.out.print("Harga: ");
+            String inputHarga = sistem.input.nextLine().trim();
+
+            if (inputHarga.isEmpty()) {
+                System.out.println("❌ Harga tidak boleh kosong!");
+                continue;
+            }
+
+            boolean formatValid = true;
+            int jumlahTitik = 0;
+
+            for (int i = 0; i < inputHarga.length(); i++) {
+                char c = inputHarga.charAt(i);
+                if (c == '.') {
+                    jumlahTitik++;
+                    if (jumlahTitik > 1) {
+                        formatValid = false;
+                        break;
+                    }
+                } else if (c < '0' || c > '9') {
+                    formatValid = false;
+                    break;
+                }
+            }
+            if (!formatValid) {
+                System.out.println("❌ Harga harus berupa angka!");
+                continue;
+            }
+
+            harga = Double.parseDouble(inputHarga);
+            if (harga <= 0) {
+                System.out.println("❌ Harga harus lebih dari 0!");
+                continue;
+            }
+
+            hargaValid = true;
+        }
 
         int hari = 0, bulan = 0, tahun = 0;
         boolean valid = false;
-
         while (!valid) {
-            System.out.print("Masukkan waktu (contoh: 29 februari 2024): ");
+            System.out.print("Masukkan waktu (contoh: 28 februari 2024): ");
             String[] waktu = sistem.input.nextLine().split(" ");
 
             boolean inputBenar = true;
@@ -117,11 +174,40 @@ public class TambahPenerbangan {
             valid = inputBenar;
         }
 
-        System.out.print("Jumlah kursi: ");
-        int kursi = Integer.parseInt(sistem.input.nextLine());
+        int kursi = 0;
+        boolean kursiValid = false;
+        while (!kursiValid) {
+            System.out.print("Jumlah kursi: ");
+            String inputKursi = sistem.input.nextLine().trim();
+
+            if (inputKursi.isEmpty()) {
+                System.out.println("❌ Jumlah kursi tidak boleh kosong!");
+                continue;
+            }
+            boolean formatValid = true;
+            for (int i = 0; i < inputKursi.length(); i++) {
+                char c = inputKursi.charAt(i);
+                if (c < '0' || c > '9') {
+                    formatValid = false;
+                    break;
+                }
+            }
+
+            if (!formatValid) {
+                System.out.println("❌ Jumlah kursi harus berupa angka bulat!");
+                continue;
+            }
+
+            kursi = Integer.parseInt(inputKursi);
+            if (kursi <= 0) {
+                System.out.println("❌ Jumlah kursi harus lebih dari 0!");
+                continue;
+            }
+            kursiValid = true;
+        }
 
         sistem.daftarPenerbangan[sistem.jumlahPenerbangan++] =
                 new model.Penerbangan(sistem.nextIdPenerbangan++, pesawat, asal, tujuan, harga, hari, bulan, tahun, kursi);
-        System.out.println("✅ Penerbangan ditambahkan.");
+        System.out.println("✅ Penerbangan berhasil ditambahkan!");
     }
 }

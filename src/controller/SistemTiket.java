@@ -3,6 +3,7 @@ package controller;
 import model.Penerbangan;
 import model.Pemesanan;
 import view.Tampilan;
+
 import java.util.Scanner;
 
 public class SistemTiket {
@@ -63,6 +64,11 @@ public class SistemTiket {
     }
 
     public void urutanPenerbanganSementara() {
+        if (jumlahPenerbangan == 0) {
+            System.out.println("\n⚠️ Belum ada data penerbangan.");
+            return;
+        }
+
         Penerbangan[] salinan = new Penerbangan[jumlahPenerbangan];
         for (int i = 0; i < jumlahPenerbangan; i++) {
             salinan[i] = daftarPenerbangan[i];
@@ -83,83 +89,142 @@ public class SistemTiket {
     }
 
     public void cariPenerbangan() {
-        System.out.print("Masukkan asal: ");
-        String asal = input.nextLine();
+        System.out.println("\n=== CARI PENERBANGAN ===\n");
 
-        System.out.print("Masukkan tujuan: ");
-        String tujuan = input.nextLine();
-
-        System.out.print("Masukkan waktu keberangkatan: (contoh: 09 September 2025): ");
-        String waktu = input.nextLine();
-
-        String[] bagian = waktu.split(" ");
-        if (bagian.length != 3) {
-            System.out.println("Format salah! Contoh: 09 September 2025");
-            return;
+        String asal = "";
+        while (asal.isEmpty()) {
+            System.out.print("Masukkan asal: ");
+            asal = input.nextLine().trim();
+            if (asal.isEmpty()) {
+                System.out.println("❌ Kota asal tidak boleh kosong!");
+            }
         }
 
-        int hari = Integer.parseInt(bagian[0]);
-        String namaBulan = bagian[1].toLowerCase();
-        int tahun = Integer.parseInt(bagian[2]);
-        int bulan;
-
-        switch (namaBulan) {
-            case "januari":
-                bulan = 1;
-                break;
-            case "februari":
-                bulan = 2;
-                break;
-            case "maret":
-                bulan = 3;
-                break;
-            case "april":
-                bulan = 4;
-                break;
-            case "mei":
-                bulan = 5;
-                break;
-            case "juni":
-                bulan = 6;
-                break;
-            case "juli":
-                bulan = 7;
-                break;
-            case "agustus":
-                bulan = 8;
-                break;
-            case "september":
-                bulan = 9;
-                break;
-            case "oktober":
-                bulan = 10;
-                break;
-            case "november":
-                bulan = 11;
-                break;
-            case "desember":
-                bulan = 12;
-                break;
-            default:
-                bulan = -1;
-                break;
+        String tujuan = "";
+        while (tujuan.isEmpty()) {
+            System.out.print("Masukkan tujuan: ");
+            tujuan = input.nextLine().trim();
+            if (tujuan.isEmpty()) {
+                System.out.println("❌ Kota tujuan tidak boleh kosong!");
+            }
         }
 
-        if (bulan == -1) {
-            System.out.println("Bulan tidak valid!");
-            return;
+        int hari = 0, bulan = 0, tahun = 0;
+        boolean valid = false;
+
+        while (!valid) {
+            System.out.print("Masukkan waktu keberangkatan (contoh: 09 September 2025): ");
+            String waktu = input.nextLine().trim();
+
+            String[] bagian = waktu.split(" ");
+            if (bagian.length != 3) {
+                System.out.println("❌ Format salah! Contoh: 09 September 2025");
+                continue;
+            }
+
+            String strHari = bagian[0];
+            String namaBulan = bagian[1].toLowerCase();
+            String strTahun = bagian[2];
+
+            boolean hariValid = true;
+            for (int i = 0; i < strHari.length(); i++) {
+                if (strHari.charAt(i) < '0' || strHari.charAt(i) > '9') {
+                    System.out.println("❌ Tanggal harus berupa angka!");
+                    hariValid = false;
+                    break;
+                }
+            }
+            if (!hariValid) continue;
+
+            boolean tahunValid = true;
+            for (int i = 0; i < strTahun.length(); i++) {
+                if (strTahun.charAt(i) < '0' || strTahun.charAt(i) > '9') {
+                    System.out.println("❌ Tahun harus berupa angka!");
+                    tahunValid = false;
+                    break;
+                }
+            }
+            if (!tahunValid) continue;
+
+            hari = Integer.parseInt(strHari);
+            tahun = Integer.parseInt(strTahun);
+
+            switch (namaBulan) {
+                case "januari":
+                    bulan = 1;
+                    break;
+                case "februari":
+                    bulan = 2;
+                    break;
+                case "maret":
+                    bulan = 3;
+                    break;
+                case "april":
+                    bulan = 4;
+                    break;
+                case "mei":
+                    bulan = 5;
+                    break;
+                case "juni":
+                    bulan = 6;
+                    break;
+                case "juli":
+                    bulan = 7;
+                    break;
+                case "agustus":
+                    bulan = 8;
+                    break;
+                case "september":
+                    bulan = 9;
+                    break;
+                case "oktober":
+                    bulan = 10;
+                    break;
+                case "november":
+                    bulan = 11;
+                    break;
+                case "desember":
+                    bulan = 12;
+                    break;
+                default:
+                    System.out.println("❌ Nama bulan tidak valid!");
+                    bulan = -1;
+            }
+
+            if (bulan == -1) {
+                continue;
+            }
+
+            int maxHari = 31;
+            if (bulan == 2) {
+                boolean kabisat = (tahun % 4 == 0 && tahun % 100 != 0) || (tahun % 400 == 0);
+                maxHari = kabisat ? 29 : 28;
+            } else if (bulan == 4 || bulan == 6 || bulan == 9 || bulan == 11) {
+                maxHari = 30;
+            }
+
+            if (hari < 1 || hari > maxHari) {
+                System.out.println("❌ Tanggal tidak valid untuk bulan yang dipilih!");
+                continue;
+            }
+            valid = true;
         }
 
         boolean ketemu = false;
+        System.out.println("\n--- Hasil Pencarian ---");
         for (int i = 0; i < jumlahPenerbangan; i++) {
             Penerbangan p = daftarPenerbangan[i];
-            if (p.asal.equalsIgnoreCase(asal) && p.tujuan.equalsIgnoreCase(tujuan) && p.hari == hari && p.bulan == bulan && p.tahun == tahun) {
+            if (p.asal.equalsIgnoreCase(asal) &&
+                    p.tujuan.equalsIgnoreCase(tujuan) &&
+                    p.hari == hari &&
+                    p.bulan == bulan &&
+                    p.tahun == tahun) {
                 System.out.println(p);
                 ketemu = true;
             }
         }
         if (!ketemu) {
-            System.out.println("❌ Tidak ditemukan.");
+            System.out.println("❌ Tidak ditemukan penerbangan dengan kriteria tersebut.");
         }
     }
 
