@@ -3,7 +3,6 @@ package controller;
 import model.Penerbangan;
 import model.Pemesanan;
 import view.Tampilan;
-
 import java.util.Scanner;
 
 public class SistemTiket {
@@ -15,7 +14,6 @@ public class SistemTiket {
     public int jumlahPemesanan = 0;
     public int nextIdPenerbangan = 1;
     public int nextIdPemesanan = 1;
-
     public void isiContohPenerbangan() {
         daftarPenerbangan[jumlahPenerbangan++] = new Penerbangan(nextIdPenerbangan++, "Garuda 101", "Jakarta", "Surabaya", 750000, 10, 10, 2025, 100);
         daftarPenerbangan[jumlahPenerbangan++] = new Penerbangan(nextIdPenerbangan++, "Lion Air 202", "Jakarta", "Bali", 650000, 11, 12, 2025, 120);
@@ -193,10 +191,7 @@ public class SistemTiket {
                     bulan = -1;
             }
 
-            if (bulan == -1) {
-                continue;
-            }
-
+            if (bulan == -1) continue;
             int maxHari = 31;
             if (bulan == 2) {
                 boolean kabisat = (tahun % 4 == 0 && tahun % 100 != 0) || (tahun % 400 == 0);

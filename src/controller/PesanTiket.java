@@ -1,7 +1,6 @@
 package controller;
 
 import java.time.LocalDateTime;
-
 import model.Penerbangan;
 import model.Pemesanan;
 
@@ -64,7 +63,6 @@ public class PesanTiket {
             System.out.print("Jumlah tiket: ");
             String inputJumlah = sistem.input.nextLine().trim();
 
-            // Cek input kosong
             if (inputJumlah.isEmpty()) {
                 System.out.println("❌ Jumlah tiket tidak boleh kosong!");
                 continue;

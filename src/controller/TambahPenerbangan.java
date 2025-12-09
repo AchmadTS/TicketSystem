@@ -76,7 +76,6 @@ public class TambahPenerbangan {
                 System.out.println("❌ Harga harus lebih dari 0!");
                 continue;
             }
-
             hargaValid = true;
         }
 
@@ -115,7 +114,6 @@ public class TambahPenerbangan {
                 if (inputBenar) {
                     hari = Integer.parseInt(strHari);
                     tahun = Integer.parseInt(strTahun);
-
                     switch (namaBulan) {
                         case "januari":
                             bulan = 1;
@@ -166,7 +164,6 @@ public class TambahPenerbangan {
                         } else if (bulan == 4 || bulan == 6 || bulan == 9 || bulan == 11) {
                             maxHari = 30;
                         }
-
                         if (hari < 1 || hari > maxHari) {
                             System.out.println("❌ Tanggal tidak valid untuk bulan " + namaBulanAsli + "!");
                             inputBenar = false;
@@ -209,8 +206,7 @@ public class TambahPenerbangan {
             kursiValid = true;
         }
 
-        sistem.daftarPenerbangan[sistem.jumlahPenerbangan++] =
-                new model.Penerbangan(sistem.nextIdPenerbangan++, pesawat, asal, tujuan, harga, hari, bulan, tahun, kursi);
+        sistem.daftarPenerbangan[sistem.jumlahPenerbangan++] = new model.Penerbangan(sistem.nextIdPenerbangan++, pesawat, asal, tujuan, harga, hari, bulan, tahun, kursi);
         System.out.println("✅ Penerbangan berhasil ditambahkan!");
     }
 }

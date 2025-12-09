@@ -68,25 +68,14 @@ public class Pemesanan {
 
     public String ringkasan(Penerbangan penerbangan) {
         String infoPenerbangan = "";
-
         if (penerbangan != null) {
             String namaBulan = getNamaBulan(penerbangan.bulan);
-            infoPenerbangan = penerbangan.pesawat + " "
-                    + penerbangan.asal + " -> "
-                    + penerbangan.tujuan + " ("
-                    + penerbangan.hari + " "
-                    + namaBulan + " "
-                    + penerbangan.tahun + ")";
+            infoPenerbangan = penerbangan.pesawat + " " + penerbangan.asal + " -> " + penerbangan.tujuan + " (" + penerbangan.hari + " " + namaBulan + " " + penerbangan.tahun + ")";
         } else {
             infoPenerbangan = "Penerbangan sudah dihapus";
         }
 
-        String waktu = waktuPesan.getYear() + "-"
-                + (waktuPesan.getMonthValue() < 10 ? "0" : "") + waktuPesan.getMonthValue() + "-"
-                + (waktuPesan.getDayOfMonth() < 10 ? "0" : "") + waktuPesan.getDayOfMonth() + " "
-                + (waktuPesan.getHour() < 10 ? "0" : "") + waktuPesan.getHour() + ":"
-                + (waktuPesan.getMinute() < 10 ? "0" : "") + waktuPesan.getMinute();
-
+        String waktu = waktuPesan.getYear() + "-" + (waktuPesan.getMonthValue() < 10 ? "0" : "") + waktuPesan.getMonthValue() + "-" + (waktuPesan.getDayOfMonth() < 10 ? "0" : "") + waktuPesan.getDayOfMonth() + " " + (waktuPesan.getHour() < 10 ? "0" : "") + waktuPesan.getHour() + ":" + (waktuPesan.getMinute() < 10 ? "0" : "") + waktuPesan.getMinute();
         DecimalFormat df = new DecimalFormat("#,###");
         return "ID Pesanan #" + idPemesanan
                 + " | Nama: " + namaPelanggan

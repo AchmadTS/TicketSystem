@@ -1,12 +1,10 @@
 package controller;
 
 import model.Penerbangan;
-
 import java.text.DecimalFormat;
 
 public class EditPenerbangan {
     private SistemTiket sistem;
-
     public EditPenerbangan(SistemTiket sistem) {
         this.sistem = sistem;
     }
@@ -56,7 +54,6 @@ public class EditPenerbangan {
             }
 
             p = sistem.cariById(id);
-
             if (p == null) {
                 System.out.println("❌ ID penerbangan tidak ada! Silakan coba lagi");
             }

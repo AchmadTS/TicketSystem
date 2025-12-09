@@ -2,7 +2,6 @@ package controller;
 
 public class HapusPenerbangan {
     private SistemTiket sistem;
-
     public HapusPenerbangan(SistemTiket sistem) {
         this.sistem = sistem;
     }
@@ -20,7 +19,6 @@ public class HapusPenerbangan {
         }
 
         System.out.println();
-
         int idx = -1;
         while (idx == -1) {
             int id = 0;

@@ -12,7 +12,6 @@ public class Penerbangan {
     public int hari;
     public int tahun;
     public int jumlahKursi;
-
     public Penerbangan(int id, String pesawat, String asal, String tujuan, double harga, int hari, int bulan, int tahun, int jumlahKursi) {
         this.id = id;
         this.pesawat = pesawat;
@@ -75,7 +74,6 @@ public class Penerbangan {
     public String toString() {
         String namaBulan = namaBulan(this.bulan);
         DecimalFormat df = new DecimalFormat("#,###");
-
         return "ID:" + id +
                 " | " + pesawat +
                 " | " + asal + " -> " + tujuan +
