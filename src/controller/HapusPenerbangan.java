@@ -8,7 +8,10 @@ public class HapusPenerbangan {
     }
 
     public void run() {
-        System.out.println("\n=== HAPUS PENERBANGAN ===\n");
+        System.out.println();
+        System.out.println("╔═════════════════════════════════════════════════════════╗");
+        System.out.println("║                 🗑️ HAPUS PENERBANGAN                    ║");
+        System.out.println("╚═════════════════════════════════════════════════════════╝");
         sistem.view.showDaftarPenerbangan(sistem.daftarPenerbangan, sistem.jumlahPenerbangan);
 
         if (sistem.jumlahPenerbangan == 0) {
@@ -61,7 +64,9 @@ public class HapusPenerbangan {
             }
         }
 
-        System.out.println("\n📋 Data yang akan dihapus:");
+        System.out.println("┌──────────────────────────────────────────────────────────┐");
+        System.out.println("│          🗑️ DATA PENERBANGAN YANG AKAN DIHAPUS           │");
+        System.out.println("└──────────────────────────────────────────────────────────┘");
         System.out.println(sistem.daftarPenerbangan[idx]);
         System.out.println();
 

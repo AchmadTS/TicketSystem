@@ -89,8 +89,10 @@ public class SistemTiket {
     }
 
     public void cariPenerbangan() {
-        System.out.println("\n=== CARI PENERBANGAN ===\n");
-
+        System.out.println();
+        System.out.println("╔═════════════════════════════════════════════════════════╗");
+        System.out.println("║                 🔍 CARI PENERBANGAN                     ║");
+        System.out.println("╚═════════════════════════════════════════════════════════╝");
         String asal = "";
         while (asal.isEmpty()) {
             System.out.print("Masukkan asal: ");
@@ -211,7 +213,9 @@ public class SistemTiket {
         }
 
         boolean ketemu = false;
-        System.out.println("\n--- Hasil Pencarian ---");
+        System.out.println("┌──────────────────────────────────────────────────────────┐");
+        System.out.println("│                 🔍 HASIL PENCARIAN                       │");
+        System.out.println("└──────────────────────────────────────────────────────────┘");
         for (int i = 0; i < jumlahPenerbangan; i++) {
             Penerbangan p = daftarPenerbangan[i];
             if (p.asal.equalsIgnoreCase(asal) &&

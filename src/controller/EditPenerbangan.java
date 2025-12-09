@@ -12,7 +12,10 @@ public class EditPenerbangan {
     }
 
     public void run() {
-        System.out.println("\n=== EDIT PENERBANGAN ===\n");
+        System.out.println();
+        System.out.println("╔═════════════════════════════════════════════════════════╗");
+        System.out.println("║                 ✏️ EDIT PENERBANGAN                     ║");
+        System.out.println("╚═════════════════════════════════════════════════════════╝");
         sistem.view.showDaftarPenerbangan(sistem.daftarPenerbangan, sistem.jumlahPenerbangan);
 
         if (sistem.jumlahPenerbangan == 0) {
@@ -86,7 +89,9 @@ public class EditPenerbangan {
             }
         }
 
-        System.out.println("\n📋 Data saat ini:");
+        System.out.println("┌──────────────────────────────────────────────────────────┐");
+        System.out.println("│                 📋 DATA SAAT INI:                        │");
+        System.out.println("└──────────────────────────────────────────────────────────┘");
         System.out.println(p);
         System.out.println();
         System.out.println("--- Edit Data (tekan ENTER untuk skip) ---");

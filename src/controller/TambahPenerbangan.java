@@ -8,8 +8,10 @@ public class TambahPenerbangan {
     }
 
     public void run() {
-        System.out.println("\n=== TAMBAH PENERBANGAN BARU ===\n");
-
+        System.out.println();
+        System.out.println("╔═════════════════════════════════════════════════════════╗");
+        System.out.println("║                 ➕ TAMBAH PENERBANGAN                   ║");
+        System.out.println("╚═════════════════════════════════════════════════════════╝");
         String pesawat = "";
         while (pesawat.isEmpty()) {
             System.out.print("Nama pesawat: ");

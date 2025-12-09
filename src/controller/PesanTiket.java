@@ -104,13 +104,13 @@ public class PesanTiket {
         sistem.daftarPemesanan[sistem.jumlahPemesanan++] = new Pemesanan(sistem.nextIdPemesanan++, p.id, nama, jumlah, total, LocalDateTime.now());
 
         System.out.println();
-        System.out.println("╔════════════════════════════════════════════════╗");
-        System.out.println("║         ✅ PEMESANAN BERHASIL! ✅              ║");
-        System.out.println("╚════════════════════════════════════════════════╝");
+        System.out.println("╔═════════════════════════════════════════════════════════╗");
+        System.out.println("║                PEMESANAN BERHASIL! ✅                   ║");
+        System.out.println("╚═════════════════════════════════════════════════════════╝");
         System.out.printf("Nama Pemesan  : %s\n", nama);
         System.out.printf("Jumlah Tiket  : %d\n", jumlah);
         System.out.printf("Total Biaya   : Rp%,.0f\n", total);
         System.out.printf("Sisa Kursi    : %d\n", p.jumlahKursi);
-        System.out.println("────────────────────────────────────────────────");
+        System.out.println("═══════════════════════════════════════════════════════════");
     }
 }
