@@ -4,12 +4,12 @@ import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 
 public class Pemesanan {
-    public int idPemesanan;
+    int idPemesanan;
     public int idPenerbangan;
-    public String namaPelanggan;
-    public int jumlah;
-    public double totalHarga;
-    public LocalDateTime waktuPesan;
+    String namaPelanggan;
+    int jumlah;
+    double totalHarga;
+    LocalDateTime waktuPesan;
 
     public Pemesanan(int idPemesanan, int idPenerbangan, String namaPelanggan, int jumlah, double totalHarga, LocalDateTime waktuPesan) {
         this.idPemesanan = idPemesanan;
