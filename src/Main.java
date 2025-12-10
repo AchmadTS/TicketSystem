@@ -1,5 +1,3 @@
-package main;
-
 import controller.SistemTiket;
 
 public class Main {
