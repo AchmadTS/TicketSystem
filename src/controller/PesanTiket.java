@@ -13,39 +13,40 @@ public class PesanTiket {
 
     public void run() {
         sistem.view.showDaftarPenerbangan(sistem.daftarPenerbangan, sistem.jumlahPenerbangan);
-        int id = 0;
-        boolean idValid = false;
-        while (!idValid) {
-            System.out.print("Masukkan ID penerbangan: ");
-            String inputId = sistem.input.nextLine().trim();
+        Penerbangan p = null;
+        while (p == null) {
+            int id = 0;
+            boolean idValid = false;
+            while (!idValid) {
+                System.out.print("Masukkan ID penerbangan: ");
+                String inputId = sistem.input.nextLine().trim();
 
-            if (inputId.isEmpty()) {
-                System.out.println("❌ ID tidak boleh kosong!");
-                continue;
-            }
-
-            boolean formatValid = true;
-            for (int i = 0; i < inputId.length(); i++) {
-                char c = inputId.charAt(i);
-                if (c < '0' || c > '9') {
-                    formatValid = false;
-                    break;
+                if (inputId.isEmpty()) {
+                    System.out.println("❌ ID tidak boleh kosong!");
+                    continue;
                 }
+
+                boolean formatValid = true;
+                for (int i = 0; i < inputId.length(); i++) {
+                    char c = inputId.charAt(i);
+                    if (c < '0' || c > '9') {
+                        formatValid = false;
+                        break;
+                    }
+                }
+
+                if (!formatValid) {
+                    System.out.println("❌ ID harus berupa angka!");
+                    continue;
+                }
+
+                id = Integer.parseInt(inputId);
+                idValid = true;
             }
-
-            if (!formatValid) {
-                System.out.println("❌ ID harus berupa angka!");
-                continue;
+            p = sistem.cariById(id);
+            if (p == null) {
+                System.out.println("❌ Tidak ditemukan");
             }
-
-            id = Integer.parseInt(inputId);
-            idValid = true;
-        }
-        Penerbangan p = sistem.cariById(id);
-
-        if (p == null) {
-            System.out.println("❌ Tidak ditemukan.");
-            return;
         }
 
         String nama = "";

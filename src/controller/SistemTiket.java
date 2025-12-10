@@ -3,6 +3,7 @@ package controller;
 import model.Penerbangan;
 import model.Pemesanan;
 import view.Tampilan;
+
 import java.util.Scanner;
 
 public class SistemTiket {
@@ -14,6 +15,7 @@ public class SistemTiket {
     public int jumlahPemesanan = 0;
     public int nextIdPenerbangan = 1;
     public int nextIdPemesanan = 1;
+
     public void isiContohPenerbangan() {
         daftarPenerbangan[jumlahPenerbangan++] = new Penerbangan(nextIdPenerbangan++, "Garuda 101", "Jakarta", "Surabaya", 750000, 10, 10, 2025, 100);
         daftarPenerbangan[jumlahPenerbangan++] = new Penerbangan(nextIdPenerbangan++, "Lion Air 202", "Jakarta", "Bali", 650000, 11, 12, 2025, 120);
@@ -213,11 +215,7 @@ public class SistemTiket {
         System.out.println("└──────────────────────────────────────────────────────────┘");
         for (int i = 0; i < jumlahPenerbangan; i++) {
             Penerbangan p = daftarPenerbangan[i];
-            if (p.asal.equalsIgnoreCase(asal) &&
-                    p.tujuan.equalsIgnoreCase(tujuan) &&
-                    p.hari == hari &&
-                    p.bulan == bulan &&
-                    p.tahun == tahun) {
+            if (p.asal.equalsIgnoreCase(asal) && p.tujuan.equalsIgnoreCase(tujuan) && p.hari == hari && p.bulan == bulan && p.tahun == tahun) {
                 System.out.println(p);
                 ketemu = true;
             }
