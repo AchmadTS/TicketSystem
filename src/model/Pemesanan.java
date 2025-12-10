@@ -3,6 +3,8 @@ package model;
 import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 
+import util.Helper;
+
 public class Pemesanan {
     public int idPemesanan;
     public int idPenerbangan;
@@ -20,62 +22,16 @@ public class Pemesanan {
         this.waktuPesan = waktuPesan;
     }
 
-    public String getNamaBulan(int bulan) {
-        String namaBulan = "";
-        switch (bulan) {
-            case 1:
-                namaBulan = "Januari";
-                break;
-            case 2:
-                namaBulan = "Februari";
-                break;
-            case 3:
-                namaBulan = "Maret";
-                break;
-            case 4:
-                namaBulan = "April";
-                break;
-            case 5:
-                namaBulan = "Mei";
-                break;
-            case 6:
-                namaBulan = "Juni";
-                break;
-            case 7:
-                namaBulan = "Juli";
-                break;
-            case 8:
-                namaBulan = "Agustus";
-                break;
-            case 9:
-                namaBulan = "September";
-                break;
-            case 10:
-                namaBulan = "Oktober";
-                break;
-            case 11:
-                namaBulan = "November";
-                break;
-            case 12:
-                namaBulan = "Desember";
-                break;
-            default:
-                namaBulan = "Bulan tidak valid";
-                break;
-        }
-        return namaBulan;
-    }
-
     public String ringkasan(Penerbangan penerbangan) {
         String infoPenerbangan = "";
         if (penerbangan != null) {
-            String namaBulan = getNamaBulan(penerbangan.bulan);
+            String namaBulan = Helper.getNamaBulan(penerbangan.bulan);
             infoPenerbangan = penerbangan.pesawat + " " + penerbangan.asal + " -> " + penerbangan.tujuan + " (" + penerbangan.hari + " " + namaBulan + " " + penerbangan.tahun + ")";
         } else {
             infoPenerbangan = "Penerbangan sudah dihapus";
         }
 
-        String waktu = waktuPesan.getYear() + "-" + (waktuPesan.getMonthValue() < 10 ? "0" : "") + waktuPesan.getMonthValue() + "-" + (waktuPesan.getDayOfMonth() < 10 ? "0" : "") + waktuPesan.getDayOfMonth() + " " + (waktuPesan.getHour() < 10 ? "0" : "") + waktuPesan.getHour() + ":" + (waktuPesan.getMinute() < 10 ? "0" : "") + waktuPesan.getMinute();
+        String waktu = waktuPesan.getYear() + "-" + Helper.formatDuaDigit(waktuPesan.getMonthValue()) + "-" + Helper.formatDuaDigit(waktuPesan.getDayOfMonth()) + " " + Helper.formatDuaDigit(waktuPesan.getHour()) + ":" + Helper.formatDuaDigit(waktuPesan.getMinute());
         DecimalFormat df = new DecimalFormat("#,###");
         return "ID Pesanan #" + idPemesanan
                 + " | Nama: " + namaPelanggan
