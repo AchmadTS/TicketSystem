@@ -57,31 +57,31 @@ public class EditPenerbangan {
             if (p == null) {
                 System.out.println("❌ ID penerbangan tidak ada! Silakan coba lagi");
             }
-
-            int jumlahPemesananTerkait = 0;
-            for (int i = 0; i < sistem.jumlahPemesanan; i++) {
-                if (sistem.daftarPemesanan[i].idPenerbangan == p.id) {
-                    jumlahPemesananTerkait++;
-                }
+        }
+        
+        int jumlahPemesananTerkait = 0;
+        for (int i = 0; i < sistem.jumlahPemesanan; i++) {
+            if (sistem.daftarPemesanan[i].idPenerbangan == p.id) {
+                jumlahPemesananTerkait++;
             }
+        }
 
-            if (jumlahPemesananTerkait > 0) {
-                System.out.println("\n⚠️ PERINGATAN: Ada " + jumlahPemesananTerkait + " pemesanan terkait penerbangan ini!");
-                System.out.println("Mengubah data penerbangan akan mempengaruhi pemesanan yang sudah ada.");
+        if (jumlahPemesananTerkait > 0) {
+            System.out.println("\n⚠️ PERINGATAN: Ada " + jumlahPemesananTerkait + " pemesanan terkait penerbangan ini!");
+            System.out.println("Mengubah data penerbangan akan mempengaruhi pemesanan yang sudah ada.");
 
-                boolean konfirmasiValid = false;
-                while (!konfirmasiValid) {
-                    System.out.print("Lanjutkan edit? (y/n): ");
-                    String konfirmasi = sistem.input.nextLine().trim().toLowerCase();
+            boolean konfirmasiValid = false;
+            while (!konfirmasiValid) {
+                System.out.print("Lanjutkan edit? (y/n): ");
+                String konfirmasi = sistem.input.nextLine().trim().toLowerCase();
 
-                    if (konfirmasi.equals("y")) {
-                        konfirmasiValid = true;
-                    } else if (konfirmasi.equals("n")) {
-                        System.out.println("❌ Edit dibatalkan.");
-                        return;
-                    } else {
-                        System.out.println("❌ Input tidak valid! Masukkan 'y' atau 'n'.");
-                    }
+                if (konfirmasi.equals("y")) {
+                    konfirmasiValid = true;
+                } else if (konfirmasi.equals("n")) {
+                    System.out.println("❌ Edit dibatalkan.");
+                    return;
+                } else {
+                    System.out.println("❌ Input tidak valid! Masukkan 'y' atau 'n'.");
                 }
             }
         }
@@ -113,8 +113,10 @@ public class EditPenerbangan {
         }
 
         DecimalFormat df = new DecimalFormat("#,###");
+        double hargaLama = p.harga;
         System.out.print("Harga baru [Rp" + df.format(p.harga) + "]: ");
         String inputHarga = sistem.input.nextLine().trim();
+        boolean hargaBerubah = false;
         if (!inputHarga.isEmpty()) {
             boolean hargaValid = true;
             int jumlahTitik = 0;
@@ -136,9 +138,51 @@ public class EditPenerbangan {
             if (hargaValid) {
                 double hargaBaru = Double.parseDouble(inputHarga);
                 if (hargaBaru > 0) {
-                    p.harga = hargaBaru;
+                    if (jumlahPemesananTerkait > 0) {
+                        System.out.println("\n⚠️ PERHATIAN: Perubahan harga akan mempengaruhi " + jumlahPemesananTerkait + " pemesanan pada penerbangan ini!");
+                        System.out.println("Harga lama: Rp" + df.format(hargaLama));
+                        System.out.println("Harga baru: Rp" + df.format(hargaBaru));
+                        System.out.println();
+                        System.out.println("┌──────────────────────────────────────────────────────────┐");
+                        System.out.println("│       📋 PREVIEW PERUBAHAN TOTAL HARGA PEMESANAN:        │");
+                        System.out.println("└──────────────────────────────────────────────────────────┘");
+                        for (int i = 0; i < sistem.jumlahPemesanan; i++) {
+                            if (sistem.daftarPemesanan[i].idPenerbangan == p.id) {
+                                double totalLama = sistem.daftarPemesanan[i].totalHarga;
+                                double totalBaru = sistem.daftarPemesanan[i].jumlah * hargaBaru;
+                                System.out.println("• Pemesanan #" + sistem.daftarPemesanan[i].idPemesanan + " (" + sistem.daftarPemesanan[i].namaPelanggan + ") | " + "Rp" + df.format(totalLama) + " → Rp" + df.format(totalBaru));
+                            }
+                        }
+
+                        System.out.println();
+                        boolean konfirmasiHargaValid = false;
+                        while (!konfirmasiHargaValid) {
+                            System.out.print("⚠️  Yakin ingin mengubah harga dan update semua pemesanan? (y/n): ");
+                            String konfirmasiHarga = sistem.input.nextLine().trim().toLowerCase();
+                            if (konfirmasiHarga.equals("y")) {
+                                konfirmasiHargaValid = true;
+                                p.harga = hargaBaru;
+                                hargaBerubah = true;
+                                for (int i = 0; i < sistem.jumlahPemesanan; i++) {
+                                    if (sistem.daftarPemesanan[i].idPenerbangan == p.id) {
+                                        sistem.daftarPemesanan[i].totalHarga = sistem.daftarPemesanan[i].jumlah * hargaBaru;
+                                    }
+                                }
+                                System.out.println("✅ Harga penerbangan dan total harga pemesanan berhasil diperbarui!");
+                            } else if (konfirmasiHarga.equals("n")) {
+                                System.out.println("❌ Perubahan harga dibatalkan.");
+                                konfirmasiHargaValid = true;
+                            } else {
+                                System.out.println("❌ Tidak valid! Masukkan 'y' atau 'n'");
+                            }
+                        }
+                    } else {
+                        p.harga = hargaBaru;
+                        hargaBerubah = true;
+                        System.out.println("✅ Harga penerbangan berhasil diperbarui!");
+                    }
                 } else {
-                    System.out.println("⚠️ Harga harus lebih dari 0! Harga idak diubah");
+                    System.out.println("⚠️ Harga harus > 0! Harga tidak diubah");
                 }
             } else {
                 System.out.println("⚠️ Format harga tidak valid! Harga tidak diubah");
