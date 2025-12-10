@@ -1,10 +1,13 @@
-package controller;
+package controller.updade;
 
+import controller.SistemTiket;
 import model.Penerbangan;
+
 import java.text.DecimalFormat;
 
 public class EditPenerbangan {
     private SistemTiket sistem;
+
     public EditPenerbangan(SistemTiket sistem) {
         this.sistem = sistem;
     }
@@ -58,7 +61,7 @@ public class EditPenerbangan {
                 System.out.println("❌ ID penerbangan tidak ada! Silakan coba lagi");
             }
         }
-        
+
         int jumlahPemesananTerkait = 0;
         for (int i = 0; i < sistem.jumlahPemesanan; i++) {
             if (sistem.daftarPemesanan[i].idPenerbangan == p.id) {
@@ -328,6 +331,76 @@ public class EditPenerbangan {
             p.hari = hari;
             p.bulan = bulan;
             p.tahun = tahun;
+
+            int jam = 0;
+            boolean jamValid = false;
+            while (!jamValid) {
+                System.out.print("Masukkan jam keberangkatan baru (0-23): ");
+                String inputJam = sistem.input.nextLine().trim();
+
+                if (inputJam.isEmpty()) {
+                    System.out.println("❌ Jam tidak boleh kosong!");
+                    continue;
+                }
+
+                boolean formatValid = true;
+                for (int i = 0; i < inputJam.length(); i++) {
+                    char c = inputJam.charAt(i);
+                    if (c < '0' || c > '9') {
+                        formatValid = false;
+                        break;
+                    }
+                }
+
+                if (!formatValid) {
+                    System.out.println("❌ Jam harus berupa angka!");
+                    continue;
+                }
+
+                jam = Integer.parseInt(inputJam);
+                if (jam < 0 || jam > 23) {
+                    System.out.println("❌ Jam harus antara 0-23!");
+                    continue;
+                }
+                jamValid = true;
+            }
+
+            int menit = 0;
+            boolean menitValid = false;
+            while (!menitValid) {
+                System.out.print("Masukkan menit keberangkatan baru (0-59): ");
+                String inputMenit = sistem.input.nextLine().trim();
+
+                if (inputMenit.isEmpty()) {
+                    System.out.println("❌ Menit tidak boleh kosong!");
+                    continue;
+                }
+
+                boolean formatValid = true;
+                for (int i = 0; i < inputMenit.length(); i++) {
+                    char c = inputMenit.charAt(i);
+                    if (c < '0' || c > '9') {
+                        formatValid = false;
+                        break;
+                    }
+                }
+
+                if (!formatValid) {
+                    System.out.println("❌ Menit harus berupa angka!");
+                    continue;
+                }
+
+                menit = Integer.parseInt(inputMenit);
+
+                if (menit < 0 || menit > 59) {
+                    System.out.println("❌ Menit harus antara 0-59!");
+                    continue;
+                }
+
+                menitValid = true;
+            }
+            p.jam = jam;
+            p.menit = menit;
         }
 
         System.out.println();

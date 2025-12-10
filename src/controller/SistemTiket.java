@@ -1,9 +1,12 @@
 package controller;
 
+import controller.create.PesanTiket;
+import controller.create.TambahPenerbangan;
+import controller.delete.HapusPenerbangan;
+import controller.updade.EditPenerbangan;
 import model.Penerbangan;
 import model.Pemesanan;
 import view.Tampilan;
-
 import java.util.Scanner;
 
 public class SistemTiket {
@@ -17,9 +20,9 @@ public class SistemTiket {
     public int nextIdPemesanan = 1;
 
     public void isiContohPenerbangan() {
-        daftarPenerbangan[jumlahPenerbangan++] = new Penerbangan(nextIdPenerbangan++, "Garuda 101", "Jakarta", "Surabaya", 750000, 10, 10, 2025, 100);
-        daftarPenerbangan[jumlahPenerbangan++] = new Penerbangan(nextIdPenerbangan++, "Lion Air 202", "Jakarta", "Bali", 650000, 11, 12, 2025, 120);
-        daftarPenerbangan[jumlahPenerbangan++] = new Penerbangan(nextIdPenerbangan++, "Batik 303", "Bandung", "Jakarta", 300000, 9, 9, 2025, 80);
+        daftarPenerbangan[jumlahPenerbangan++] = new Penerbangan(nextIdPenerbangan++, "Garuda 101", "Jakarta", "Surabaya", 750000, 10, 10, 2025, 8, 30, 100);
+        daftarPenerbangan[jumlahPenerbangan++] = new Penerbangan(nextIdPenerbangan++, "Lion Air 202", "Jakarta", "Bali", 650000, 11, 12, 2025, 14, 45, 120);
+        daftarPenerbangan[jumlahPenerbangan++] = new Penerbangan(nextIdPenerbangan++, "Batik 303", "Bandung", "Jakarta", 300000, 9, 9, 2025, 6, 15, 80);
     }
 
     public void mainMenu() {
@@ -78,7 +81,27 @@ public class SistemTiket {
             for (int j = i + 1; j < jumlahPenerbangan; j++) {
                 Penerbangan p1 = salinan[i];
                 Penerbangan p2 = salinan[j];
-                if (p1.tahun > p2.tahun || (p1.tahun == p2.tahun && p1.bulan > p2.bulan) || (p1.tahun == p2.tahun && p1.bulan == p2.bulan && p1.hari > p2.hari)) {
+                boolean tukar = false;
+                if (p1.tahun > p2.tahun) {
+                    tukar = true;
+                } else if (p1.tahun == p2.tahun) {
+                    if (p1.bulan > p2.bulan) {
+                        tukar = true;
+                    } else if (p1.bulan == p2.bulan) {
+                        if (p1.hari > p2.hari) {
+                            tukar = true;
+                        } else if (p1.hari == p2.hari) {
+                            if (p1.jam > p2.jam) {
+                                tukar = true;
+                            } else if (p1.jam == p2.jam) {
+                                if (p1.menit > p2.menit) {
+                                    tukar = true;
+                                }
+                            }
+                        }
+                    }
+                }
+                if (tukar) {
                     Penerbangan temp = salinan[i];
                     salinan[i] = salinan[j];
                     salinan[j] = temp;

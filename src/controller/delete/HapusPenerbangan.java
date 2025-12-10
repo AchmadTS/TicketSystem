@@ -1,4 +1,6 @@
-package controller;
+package controller.delete;
+
+import controller.SistemTiket;
 
 public class HapusPenerbangan {
     private SistemTiket sistem;
