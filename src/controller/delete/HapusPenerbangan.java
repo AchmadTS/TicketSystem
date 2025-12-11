@@ -1,6 +1,7 @@
 package controller.delete;
 
 import controller.SistemTiket;
+import util.Helper;
 
 public class HapusPenerbangan {
     private SistemTiket sistem;
@@ -23,35 +24,7 @@ public class HapusPenerbangan {
         System.out.println();
         int idx = -1;
         while (idx == -1) {
-            int id = 0;
-            boolean idValid = false;
-            while (!idValid) {
-                System.out.print("Masukkan ID penerbangan yang akan dihapus: ");
-                String inputId = sistem.input.nextLine().trim();
-
-                if (inputId.isEmpty()) {
-                    System.out.println("❌ ID tidak boleh kosong!");
-                    continue;
-                }
-
-                boolean formatValid = true;
-                for (int i = 0; i < inputId.length(); i++) {
-                    char c = inputId.charAt(i);
-                    if (c < '0' || c > '9') {
-                        formatValid = false;
-                        break;
-                    }
-                }
-
-                if (!formatValid) {
-                    System.out.println("❌ ID harus berupa angka!");
-                    continue;
-                }
-
-                id = Integer.parseInt(inputId);
-                idValid = true;
-            }
-
+            int id = Helper.inputId(sistem.input, "Masukkan ID penerbangan yang akan dihapus: ");
             for (int i = 0; i < sistem.jumlahPenerbangan; i++) {
                 if (sistem.daftarPenerbangan[i].id == id) {
                     idx = i;
@@ -60,7 +33,7 @@ public class HapusPenerbangan {
             }
 
             if (idx == -1) {
-                System.out.println("❌ Penerbangan dengan ID tersebut tidak ditemukan. Silakan coba lagi.");
+                System.out.println("❌ ID Penerbangan tidak ditemukan. Silakan coba lagi!");
             }
         }
 
@@ -83,41 +56,31 @@ public class HapusPenerbangan {
             System.out.println();
         }
 
-        boolean konfirmasiValid = false;
-        while (!konfirmasiValid) {
-            System.out.print("⚠️  Yakin ingin menghapus penerbangan ini? (y/n): ");
-            String konfirmasi = sistem.input.nextLine().trim().toLowerCase();
-
-            if (konfirmasi.equals("y")) {
-                konfirmasiValid = true;
-                int idPenerbanganYangDihapus = sistem.daftarPenerbangan[idx].id;
-                for (int i = sistem.jumlahPemesanan - 1; i >= 0; i--) {
-                    if (sistem.daftarPemesanan[i].idPenerbangan == idPenerbanganYangDihapus) {
-                        // Geser array pemesanan ke kiri
-                        for (int j = i; j < sistem.jumlahPemesanan - 1; j++) {
-                            sistem.daftarPemesanan[j] = sistem.daftarPemesanan[j + 1];
-                        }
-                        sistem.jumlahPemesanan--;
+        boolean konfirmasi = Helper.inputYesNo(sistem.input, "⚠️  Yakin ingin menghapus penerbangan ini? (y/n): ");
+        if (konfirmasi) {
+            int idPenerbanganYangDihapus = sistem.daftarPenerbangan[idx].id;
+            for (int i = sistem.jumlahPemesanan - 1; i >= 0; i--) {
+                if (sistem.daftarPemesanan[i].idPenerbangan == idPenerbanganYangDihapus) {
+                    // Geser array pemesanan ke kiri
+                    for (int j = i; j < sistem.jumlahPemesanan - 1; j++) {
+                        sistem.daftarPemesanan[j] = sistem.daftarPemesanan[j + 1];
                     }
+                    sistem.jumlahPemesanan--;
                 }
-
-                for (int i = idx; i < sistem.jumlahPenerbangan - 1; i++) {
-                    sistem.daftarPenerbangan[i] = sistem.daftarPenerbangan[i + 1];
-                }
-                sistem.jumlahPenerbangan--;
-
-                if (jumlahPemesananTerkait > 0) {
-                    System.out.println("✅ Penerbangan dan " + jumlahPemesananTerkait + " pemesanan tiket di penerbangan ini berhasil dihapus!");
-                } else {
-                    System.out.println("✅ Penerbangan berhasil dihapus!");
-                }
-
-            } else if (konfirmasi.equals("n")) {
-                System.out.println("❌ Penghapusan dibatalkan.");
-                return;
-            } else {
-                System.out.println("❌ Input tidak valid! Masukkan 'y' atau 'n'.");
             }
+
+            for (int i = idx; i < sistem.jumlahPenerbangan - 1; i++) {
+                sistem.daftarPenerbangan[i] = sistem.daftarPenerbangan[i + 1];
+            }
+
+            sistem.jumlahPenerbangan--;
+            if (jumlahPemesananTerkait > 0) {
+                System.out.println("✅ Penerbangan dan " + jumlahPemesananTerkait + " pemesanan tiket di penerbangan ini berhasil dihapus!");
+            } else {
+                System.out.println("✅ Penerbangan berhasil dihapus!");
+            }
+        } else {
+            System.out.println("❌ Penghapusan dibatalkan.");
         }
     }
 }
