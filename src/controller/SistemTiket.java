@@ -18,6 +18,9 @@ public class SistemTiket {
     public int nextIdPenerbangan = 1;
     public int nextIdPemesanan = 1;
 
+    /**
+     * Data dummy
+     */
     public void isiContohPenerbangan() {
         daftarPenerbangan[jumlahPenerbangan++] = new Penerbangan(nextIdPenerbangan++, "Garuda 101", "Jakarta", "Surabaya", 750000, 10, 10, 2025, 8, 30, 100);
         daftarPenerbangan[jumlahPenerbangan++] = new Penerbangan(nextIdPenerbangan++, "Lion Air 202", "Jakarta", "Bali", 650000, 11, 12, 2025, 14, 45, 120);
@@ -65,6 +68,12 @@ public class SistemTiket {
         }
     }
 
+    /**
+     * Menampilkan daftar penerbangan yang terurut berdasarkan waktu keberangkatan
+     * Sorting dari awal ke akhir (ascending)
+     * Urutan prioritas: tahun → bulan → hari → jam → menit
+     * Algoritma Bubble Sort
+     */
     public void urutanPenerbanganSementara() {
         if (jumlahPenerbangan == 0) {
             System.out.println("\n⚠️ Belum ada data penerbangan.");
@@ -81,19 +90,19 @@ public class SistemTiket {
                 Penerbangan p1 = salinan[i];
                 Penerbangan p2 = salinan[j];
                 boolean tukar = false;
-                if (p1.tahun > p2.tahun) {
+                if (p1.tahun > p2.tahun) { // bandingin tahun
                     tukar = true;
                 } else if (p1.tahun == p2.tahun) {
-                    if (p1.bulan > p2.bulan) {
+                    if (p1.bulan > p2.bulan) { // bandingin bulan
                         tukar = true;
                     } else if (p1.bulan == p2.bulan) {
-                        if (p1.hari > p2.hari) {
+                        if (p1.hari > p2.hari) { // bandingin hari
                             tukar = true;
                         } else if (p1.hari == p2.hari) {
-                            if (p1.jam > p2.jam) {
+                            if (p1.jam > p2.jam) { // bandingin jam
                                 tukar = true;
                             } else if (p1.jam == p2.jam) {
-                                if (p1.menit > p2.menit) {
+                                if (p1.menit > p2.menit) { // bandingin menit
                                     tukar = true;
                                 }
                             }
@@ -110,6 +119,10 @@ public class SistemTiket {
         view.showDaftarPenerbangan(salinan, jumlahPenerbangan);
     }
 
+    /**
+     * Mencari penerbangan berdasarkan: Kota asal, Kota tujuan, waktu keberangkatan
+     * Pencarian case-insensitive untuk asal dan tujuan
+     */
     public void cariPenerbangan() {
         System.out.println();
         System.out.println("╔═════════════════════════════════════════════════════════╗");
@@ -139,6 +152,9 @@ public class SistemTiket {
         }
     }
 
+    /**
+     * Cari penerbangan berdasarkan ID
+     */
     public Penerbangan cariById(int id) {
         for (int i = 0; i < jumlahPenerbangan; i++) {
             if (daftarPenerbangan[i] != null && daftarPenerbangan[i].id == id) {
