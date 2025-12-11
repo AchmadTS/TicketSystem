@@ -44,19 +44,10 @@ public class EditPenerbangan {
             System.out.println("\n⚠️ PERINGATAN: Ada " + jumlahPemesananTerkait + " pemesanan terkait penerbangan ini!");
             System.out.println("Mengubah data penerbangan akan mempengaruhi pemesanan yang sudah ada.");
 
-            boolean konfirmasiValid = false;
-            while (!konfirmasiValid) {
-                System.out.print("Lanjutkan edit? (y/n): ");
-                String konfirmasi = sistem.input.nextLine().trim().toLowerCase();
-
-                if (konfirmasi.equals("y")) {
-                    konfirmasiValid = true;
-                } else if (konfirmasi.equals("n")) {
-                    System.out.println("❌ Edit dibatalkan.");
-                    return;
-                } else {
-                    System.out.println("❌ Input tidak valid! Masukkan 'y' atau 'n'.");
-                }
+            boolean lanjutkan = Helper.inputYesNo(sistem.input, "Lanjutkan edit? (y/n): ");
+            if (!lanjutkan) {
+                System.out.println("❌ Edit dibatalkan.");
+                return;
             }
         }
 
@@ -161,47 +152,49 @@ public class EditPenerbangan {
                 System.out.print("Masukkan waktu baru (contoh: 28 februari 2024): ");
                 String[] waktu = sistem.input.nextLine().split(" ");
 
-                boolean inputBenar = true;
                 if (waktu.length != 3) {
                     System.out.println("❌ Format salah! Harus: tanggal bulan tahun");
-                    inputBenar = false;
-                } else {
-                    String strHari = waktu[0];
-                    String namaBulanAsli = waktu[1];
-                    String strTahun = waktu[2];
-
-                    if (!Helper.isAngka(strHari)) {
-                        System.out.println("❌ Tanggal harus angka!");
-                        inputBenar = false;
-                    } else if (!Helper.isAngka(strTahun)) {
-                        System.out.println("❌ Tahun harus angka!");
-                        inputBenar = false;
-                    } else {
-                        hari = Integer.parseInt(strHari);
-                        tahun = Integer.parseInt(strTahun);
-                        bulan = Helper.getBulanDariNama(namaBulanAsli);
-
-                        if (bulan == -1) {
-                            System.out.println("❌ Nama bulan tidak valid!");
-                            inputBenar = false;
-                        } else {
-                            int maxHari = 31;
-                            if (bulan == 2) {
-                                boolean kabisat = (tahun % 4 == 0 && tahun % 100 != 0) || (tahun % 400 == 0);
-                                maxHari = kabisat ? 29 : 28;
-                            } else if (bulan == 4 || bulan == 6 || bulan == 9 || bulan == 11) {
-                                maxHari = 30;
-                            }
-
-                            if (hari < 1 || hari > maxHari) {
-                                System.out.println("❌ Tanggal tidak valid untuk bulan " + namaBulanAsli + "!");
-                                inputBenar = false;
-                            }
-                        }
-                    }
+                    continue;
                 }
-                valid = inputBenar;
+
+                String strHari = waktu[0];
+                String namaBulanAsli = waktu[1];
+                String strTahun = waktu[2];
+
+                if (!Helper.isAngka(strHari)) {
+                    System.out.println("❌ Tanggal harus angka!");
+                    continue;
+                }
+
+                if (!Helper.isAngka(strTahun)) {
+                    System.out.println("❌ Tahun harus angka!");
+                    continue;
+                }
+
+                hari = Integer.parseInt(strHari);
+                tahun = Integer.parseInt(strTahun);
+                bulan = Helper.getBulanDariNama(namaBulanAsli);
+
+                if (bulan == -1) {
+                    System.out.println("❌ Nama bulan tidak valid!");
+                    continue;
+                }
+
+                int maxHari = 31;
+                if (bulan == 2) {
+                    boolean kabisat = (tahun % 4 == 0 && tahun % 100 != 0) || (tahun % 400 == 0);
+                    maxHari = kabisat ? 29 : 28;
+                } else if (bulan == 4 || bulan == 6 || bulan == 9 || bulan == 11) {
+                    maxHari = 30;
+                }
+
+                if (hari < 1 || hari > maxHari) {
+                    System.out.println("❌ Tanggal tidak valid untuk bulan " + namaBulanAsli + "!");
+                    continue;
+                }
+                valid = true;
             }
+
             p.hari = hari;
             p.bulan = bulan;
             p.tahun = tahun;
@@ -209,6 +202,7 @@ public class EditPenerbangan {
             p.jam = Helper.inputInteger(sistem.input, "Masukkan jam keberangkatan baru (0-23): ", 0, 23);
             p.menit = Helper.inputInteger(sistem.input, "Masukkan menit keberangkatan baru (0-59): ", 0, 59);
         }
+
         System.out.println();
         System.out.println("✅ Data berhasil diperbarui!");
         System.out.println("\n📋 Data baru:");
