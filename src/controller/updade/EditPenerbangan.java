@@ -7,7 +7,6 @@ import java.text.DecimalFormat;
 
 public class EditPenerbangan {
     private SistemTiket sistem;
-
     public EditPenerbangan(SistemTiket sistem) {
         this.sistem = sistem;
     }
@@ -27,35 +26,7 @@ public class EditPenerbangan {
         System.out.println();
         Penerbangan p = null;
         while (p == null) {
-            int id = 0;
-            boolean idValid = false;
-            while (!idValid) {
-                System.out.print("Masukkan ID penerbangan yang akan diedit: ");
-                String inputId = sistem.input.nextLine().trim();
-
-                if (inputId.isEmpty()) {
-                    System.out.println("❌ ID tidak boleh kosong!");
-                    continue;
-                }
-
-                boolean formatValid = true;
-                for (int i = 0; i < inputId.length(); i++) {
-                    char c = inputId.charAt(i);
-                    if (c < '0' || c > '9') {
-                        formatValid = false;
-                        break;
-                    }
-                }
-
-                if (!formatValid) {
-                    System.out.println("❌ ID harus berupa angka!");
-                    continue;
-                }
-
-                id = Integer.parseInt(inputId);
-                idValid = true;
-            }
-
+            int id = Helper.inputId(sistem.input, "Masukkan ID penerbangan yang akan diedit: ");
             p = sistem.cariById(id);
             if (p == null) {
                 System.out.println("❌ ID penerbangan tidak ada! Silakan coba lagi");
@@ -119,26 +90,9 @@ public class EditPenerbangan {
         double hargaLama = p.harga;
         System.out.print("Harga baru [Rp" + df.format(p.harga) + "]: ");
         String inputHarga = sistem.input.nextLine().trim();
-        boolean hargaBerubah = false;
+
         if (!inputHarga.isEmpty()) {
-            boolean hargaValid = true;
-            int jumlahTitik = 0;
-
-            for (int i = 0; i < inputHarga.length(); i++) {
-                char c = inputHarga.charAt(i);
-                if (c == '.') {
-                    jumlahTitik++;
-                    if (jumlahTitik > 1) {
-                        hargaValid = false;
-                        break;
-                    }
-                } else if (c < '0' || c > '9') {
-                    hargaValid = false;
-                    break;
-                }
-            }
-
-            if (hargaValid) {
+            if (Helper.isHargaValid(inputHarga)) {
                 double hargaBaru = Double.parseDouble(inputHarga);
                 if (hargaBaru > 0) {
                     if (jumlahPemesananTerkait > 0) {
@@ -149,6 +103,7 @@ public class EditPenerbangan {
                         System.out.println("┌──────────────────────────────────────────────────────────┐");
                         System.out.println("│       📋 PREVIEW PERUBAHAN TOTAL HARGA PEMESANAN:        │");
                         System.out.println("└──────────────────────────────────────────────────────────┘");
+
                         for (int i = 0; i < sistem.jumlahPemesanan; i++) {
                             if (sistem.daftarPemesanan[i].idPenerbangan == p.id) {
                                 double totalLama = sistem.daftarPemesanan[i].totalHarga;
@@ -158,30 +113,20 @@ public class EditPenerbangan {
                         }
 
                         System.out.println();
-                        boolean konfirmasiHargaValid = false;
-                        while (!konfirmasiHargaValid) {
-                            System.out.print("⚠️  Yakin ingin mengubah harga dan update semua pemesanan? (y/n): ");
-                            String konfirmasiHarga = sistem.input.nextLine().trim().toLowerCase();
-                            if (konfirmasiHarga.equals("y")) {
-                                konfirmasiHargaValid = true;
-                                p.harga = hargaBaru;
-                                hargaBerubah = true;
-                                for (int i = 0; i < sistem.jumlahPemesanan; i++) {
-                                    if (sistem.daftarPemesanan[i].idPenerbangan == p.id) {
-                                        sistem.daftarPemesanan[i].totalHarga = sistem.daftarPemesanan[i].jumlah * hargaBaru;
-                                    }
+                        boolean konfirmasiHarga = Helper.inputYesNo(sistem.input, "⚠️  Yakin ingin mengubah harga dan update semua pemesanan? (y/n): ");
+                        if (konfirmasiHarga) {
+                            p.harga = hargaBaru;
+                            for (int i = 0; i < sistem.jumlahPemesanan; i++) {
+                                if (sistem.daftarPemesanan[i].idPenerbangan == p.id) {
+                                    sistem.daftarPemesanan[i].totalHarga = sistem.daftarPemesanan[i].jumlah * hargaBaru;
                                 }
-                                System.out.println("✅ Harga penerbangan dan total harga pemesanan berhasil diperbarui!");
-                            } else if (konfirmasiHarga.equals("n")) {
-                                System.out.println("❌ Perubahan harga dibatalkan.");
-                                konfirmasiHargaValid = true;
-                            } else {
-                                System.out.println("❌ Tidak valid! Masukkan 'y' atau 'n'");
                             }
+                            System.out.println("✅ Harga penerbangan dan total harga pemesanan berhasil diperbarui!");
+                        } else {
+                            System.out.println("❌ Perubahan harga dibatalkan.");
                         }
                     } else {
                         p.harga = hargaBaru;
-                        hargaBerubah = true;
                         System.out.println("✅ Harga penerbangan berhasil diperbarui!");
                     }
                 } else {
@@ -195,17 +140,7 @@ public class EditPenerbangan {
         System.out.print("Jumlah kursi baru [" + p.jumlahKursi + "]: ");
         String inputKursi = sistem.input.nextLine().trim();
         if (!inputKursi.isEmpty()) {
-            boolean kursiValid = true;
-
-            for (int i = 0; i < inputKursi.length(); i++) {
-                char c = inputKursi.charAt(i);
-                if (c < '0' || c > '9') {
-                    kursiValid = false;
-                    break;
-                }
-            }
-
-            if (kursiValid) {
+            if (Helper.isAngka(inputKursi)) {
                 int kursiBaru = Integer.parseInt(inputKursi);
                 if (kursiBaru > 0) {
                     p.jumlahKursi = kursiBaru;
@@ -217,20 +152,8 @@ public class EditPenerbangan {
             }
         }
 
-        boolean editTanggalValid = false;
-        String editTanggal = "";
-        while (!editTanggalValid) {
-            System.out.print("Edit tanggal keberangkatan? (y/n): ");
-            editTanggal = sistem.input.nextLine().trim().toLowerCase();
-
-            if (editTanggal.equals("y") || editTanggal.equals("n")) {
-                editTanggalValid = true;
-            } else {
-                System.out.println("❌ Tidak valid! Masukkan 'y' atau 'n'");
-            }
-        }
-
-        if (editTanggal.equals("y")) {
+        boolean editTanggal = Helper.inputYesNo(sistem.input, "Edit tanggal keberangkatan? (y/n): ");
+        if (editTanggal) {
             int hari = 0, bulan = 0, tahun = 0;
             boolean valid = false;
 
@@ -245,29 +168,18 @@ public class EditPenerbangan {
                 } else {
                     String strHari = waktu[0];
                     String namaBulanAsli = waktu[1];
-                    String namaBulan = namaBulanAsli.toLowerCase();
                     String strTahun = waktu[2];
 
-                    for (char c : strHari.toCharArray()) {
-                        if (c < '0' || c > '9') {
-                            System.out.println("❌ Tanggal harus angka!");
-                            inputBenar = false;
-                            break;
-                        }
-                    }
-
-                    for (char c : strTahun.toCharArray()) {
-                        if (c < '0' || c > '9') {
-                            System.out.println("❌ Tahun harus angka!");
-                            inputBenar = false;
-                            break;
-                        }
-                    }
-
-                    if (inputBenar) {
+                    if (!Helper.isAngka(strHari)) {
+                        System.out.println("❌ Tanggal harus angka!");
+                        inputBenar = false;
+                    } else if (!Helper.isAngka(strTahun)) {
+                        System.out.println("❌ Tahun harus angka!");
+                        inputBenar = false;
+                    } else {
                         hari = Integer.parseInt(strHari);
                         tahun = Integer.parseInt(strTahun);
-                        bulan = Helper.getBulanDariNama(namaBulan);
+                        bulan = Helper.getBulanDariNama(namaBulanAsli);
 
                         if (bulan == -1) {
                             System.out.println("❌ Nama bulan tidak valid!");
@@ -294,77 +206,9 @@ public class EditPenerbangan {
             p.bulan = bulan;
             p.tahun = tahun;
 
-            int jam = 0;
-            boolean jamValid = false;
-            while (!jamValid) {
-                System.out.print("Masukkan jam keberangkatan baru (0-23): ");
-                String inputJam = sistem.input.nextLine().trim();
-
-                if (inputJam.isEmpty()) {
-                    System.out.println("❌ Jam tidak boleh kosong!");
-                    continue;
-                }
-
-                boolean formatValid = true;
-                for (int i = 0; i < inputJam.length(); i++) {
-                    char c = inputJam.charAt(i);
-                    if (c < '0' || c > '9') {
-                        formatValid = false;
-                        break;
-                    }
-                }
-
-                if (!formatValid) {
-                    System.out.println("❌ Jam harus berupa angka!");
-                    continue;
-                }
-
-                jam = Integer.parseInt(inputJam);
-                if (jam < 0 || jam > 23) {
-                    System.out.println("❌ Jam harus antara 0-23!");
-                    continue;
-                }
-                jamValid = true;
-            }
-
-            int menit = 0;
-            boolean menitValid = false;
-            while (!menitValid) {
-                System.out.print("Masukkan menit keberangkatan baru (0-59): ");
-                String inputMenit = sistem.input.nextLine().trim();
-
-                if (inputMenit.isEmpty()) {
-                    System.out.println("❌ Menit tidak boleh kosong!");
-                    continue;
-                }
-
-                boolean formatValid = true;
-                for (int i = 0; i < inputMenit.length(); i++) {
-                    char c = inputMenit.charAt(i);
-                    if (c < '0' || c > '9') {
-                        formatValid = false;
-                        break;
-                    }
-                }
-
-                if (!formatValid) {
-                    System.out.println("❌ Menit harus berupa angka!");
-                    continue;
-                }
-
-                menit = Integer.parseInt(inputMenit);
-
-                if (menit < 0 || menit > 59) {
-                    System.out.println("❌ Menit harus antara 0-59!");
-                    continue;
-                }
-
-                menitValid = true;
-            }
-            p.jam = jam;
-            p.menit = menit;
+            p.jam = Helper.inputInteger(sistem.input, "Masukkan jam keberangkatan baru (0-23): ", 0, 23);
+            p.menit = Helper.inputInteger(sistem.input, "Masukkan menit keberangkatan baru (0-59): ", 0, 59);
         }
-
         System.out.println();
         System.out.println("✅ Data berhasil diperbarui!");
         System.out.println("\n📋 Data baru:");

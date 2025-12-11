@@ -15,72 +15,14 @@ public class TambahPenerbangan {
         System.out.println("╔═════════════════════════════════════════════════════════╗");
         System.out.println("║                 ➕ TAMBAH PENERBANGAN                   ║");
         System.out.println("╚═════════════════════════════════════════════════════════╝");
-        String pesawat = "";
-        while (pesawat.isEmpty()) {
-            System.out.print("Nama pesawat: ");
-            pesawat = sistem.input.nextLine().trim();
-            if (pesawat.isEmpty()) {
-                System.out.println("❌ Nama pesawat tidak boleh kosong!");
-            }
-        }
 
-        String asal = "";
-        while (asal.isEmpty()) {
-            System.out.print("Asal: ");
-            asal = sistem.input.nextLine().trim();
-            if (asal.isEmpty()) {
-                System.out.println("❌ Kota asal tidak boleh kosong!");
-            }
-        }
-
-        String tujuan = "";
-        while (tujuan.isEmpty()) {
-            System.out.print("Tujuan: ");
-            tujuan = sistem.input.nextLine().trim();
-            if (tujuan.isEmpty()) {
-                System.out.println("❌ Kota tujuan tidak boleh kosong!");
-            }
-        }
-
-        double harga = 0;
-        boolean hargaValid = false;
-        while (!hargaValid) {
-            System.out.print("Harga: ");
-            String inputHarga = sistem.input.nextLine().trim();
-
-            if (inputHarga.isEmpty()) {
-                System.out.println("❌ Harga tidak boleh kosong!");
-                continue;
-            }
-
-            boolean formatValid = true;
-            int jumlahTitik = 0;
-
-            for (int i = 0; i < inputHarga.length(); i++) {
-                char c = inputHarga.charAt(i);
-                if (c == '.') {
-                    jumlahTitik++;
-                    if (jumlahTitik > 1) {
-                        formatValid = false;
-                        break;
-                    }
-                } else if (c < '0' || c > '9') {
-                    formatValid = false;
-                    break;
-                }
-            }
-            if (!formatValid) {
-                System.out.println("❌ Harga harus berupa angka!");
-                continue;
-            }
-
-            harga = Double.parseDouble(inputHarga);
-            if (harga <= 0) {
-                System.out.println("❌ Harga harus lebih dari 0!");
-                continue;
-            }
-            hargaValid = true;
-        }
+        String pesawat = Helper.inputStringWajib(sistem.input, "Nama pesawat: ");
+        String asal = Helper.inputStringWajib(sistem.input, "Asal: ");
+        String tujuan = Helper.inputStringWajib(sistem.input, "Tujuan: ");
+        double harga = Helper.inputHarga(sistem.input, "Harga: ");
+        int jam = Helper.inputInteger(sistem.input, "Masukkan jam keberangkatan (0-23): ", 0, 23);
+        int menit = Helper.inputInteger(sistem.input, "Masukkan menit keberangkatan (0-59): ", 0, 59);
+        int kursi = Helper.inputInteger(sistem.input, "Jumlah kursi: ", 1, Integer.MAX_VALUE);
 
         int hari = 0, bulan = 0, tahun = 0;
         boolean valid = false;
@@ -95,7 +37,6 @@ public class TambahPenerbangan {
             } else {
                 String strHari = waktu[0];
                 String namaBulanAsli = waktu[1];
-                String namaBulan = namaBulanAsli.toLowerCase();
                 String strTahun = waktu[2];
 
                 for (char c : strHari.toCharArray()) {
@@ -138,104 +79,6 @@ public class TambahPenerbangan {
                 }
             }
             valid = inputBenar;
-        }
-
-        int jam = 0;
-        boolean jamValid = false;
-        while (!jamValid) {
-            System.out.print("Masukkan jam keberangkatan (0-23): ");
-            String inputJam = sistem.input.nextLine().trim();
-
-            if (inputJam.isEmpty()) {
-                System.out.println("❌ Jam tidak boleh kosong!");
-                continue;
-            }
-
-            boolean formatValid = true;
-            for (int i = 0; i < inputJam.length(); i++) {
-                char c = inputJam.charAt(i);
-                if (c < '0' || c > '9') {
-                    formatValid = false;
-                    break;
-                }
-            }
-
-            if (!formatValid) {
-                System.out.println("❌ Jam harus berupa angka!");
-                continue;
-            }
-
-            jam = Integer.parseInt(inputJam);
-            if (jam < 0 || jam > 23) {
-                System.out.println("❌ Jam harus antara 0-23!");
-                continue;
-            }
-            jamValid = true;
-        }
-
-        int menit = 0;
-        boolean menitValid = false;
-        while (!menitValid) {
-            System.out.print("Masukkan menit keberangkatan (0-59): ");
-            String inputMenit = sistem.input.nextLine().trim();
-
-            if (inputMenit.isEmpty()) {
-                System.out.println("❌ Menit tidak boleh kosong!");
-                continue;
-            }
-
-            boolean formatValid = true;
-            for (int i = 0; i < inputMenit.length(); i++) {
-                char c = inputMenit.charAt(i);
-                if (c < '0' || c > '9') {
-                    formatValid = false;
-                    break;
-                }
-            }
-
-            if (!formatValid) {
-                System.out.println("❌ Menit harus berupa angka!");
-                continue;
-            }
-
-            menit = Integer.parseInt(inputMenit);
-            if (menit < 0 || menit > 59) {
-                System.out.println("❌ Menit harus antara 0-59!");
-                continue;
-            }
-            menitValid = true;
-        }
-
-        int kursi = 0;
-        boolean kursiValid = false;
-        while (!kursiValid) {
-            System.out.print("Jumlah kursi: ");
-            String inputKursi = sistem.input.nextLine().trim();
-
-            if (inputKursi.isEmpty()) {
-                System.out.println("❌ Jumlah kursi tidak boleh kosong!");
-                continue;
-            }
-            boolean formatValid = true;
-            for (int i = 0; i < inputKursi.length(); i++) {
-                char c = inputKursi.charAt(i);
-                if (c < '0' || c > '9') {
-                    formatValid = false;
-                    break;
-                }
-            }
-
-            if (!formatValid) {
-                System.out.println("❌ Jumlah kursi harus berupa angka bulat!");
-                continue;
-            }
-
-            kursi = Integer.parseInt(inputKursi);
-            if (kursi <= 0) {
-                System.out.println("❌ Jumlah kursi harus lebih dari 0!");
-                continue;
-            }
-            kursiValid = true;
         }
 
         sistem.daftarPenerbangan[sistem.jumlahPenerbangan++] = new model.Penerbangan(sistem.nextIdPenerbangan++, pesawat, asal, tujuan, harga, hari, bulan, tahun, jam, menit, kursi);

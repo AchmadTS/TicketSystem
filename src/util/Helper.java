@@ -1,5 +1,7 @@
 package util;
 
+import java.util.Scanner;
+
 public class Helper {
     public static String getNamaBulan(int bulan) {
         String namaBulan = "";
@@ -81,5 +83,149 @@ public class Helper {
 
     public static String formatDuaDigit(int angka) {
         return angka < 10 ? "0" + angka : String.valueOf(angka);
+    }
+
+    public static boolean isAngka(String str) {
+        if (str == null || str.isEmpty()) {
+            return false;
+        }
+        for (int i = 0; i < str.length(); i++) {
+            if (str.charAt(i) < '0' || str.charAt(i) > '9') {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static boolean isHargaValid(String str) {
+        if (str == null || str.isEmpty()) {
+            return false;
+        }
+        int jumlahTitik = 0;
+        for (int i = 0; i < str.length(); i++) {
+            char c = str.charAt(i);
+            if (c == '.') {
+                jumlahTitik++;
+                if (jumlahTitik > 1) {
+                    return false;
+                }
+            } else if (c < '0' || c > '9') {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static String inputStringWajib(Scanner input, String prompt) {
+        String hasil = "";
+        while (hasil.isEmpty()) {
+            System.out.print(prompt);
+            hasil = input.nextLine().trim();
+            if (hasil.isEmpty()) {
+                System.out.println("❌ Input tidak boleh kosong!");
+            }
+        }
+        return hasil;
+    }
+
+    public static int inputInteger(Scanner input, String prompt, int min, int max) {
+        int hasil = 0;
+        boolean valid = false;
+
+        while (!valid) {
+            System.out.print(prompt);
+            String inputStr = input.nextLine().trim();
+
+            if (inputStr.isEmpty()) {
+                System.out.println("❌ Input tidak boleh kosong!");
+                continue;
+            }
+
+            if (!isAngka(inputStr)) {
+                System.out.println("❌ Input harus berupa angka!");
+                continue;
+            }
+
+            hasil = Integer.parseInt(inputStr);
+            if (hasil < min || hasil > max) {
+                System.out.println("❌ Input harus antara " + min + "-" + max + "!");
+                continue;
+            }
+            valid = true;
+        }
+        return hasil;
+    }
+
+    public static double inputHarga(Scanner input, String prompt) {
+        double hasil = 0;
+        boolean valid = false;
+
+        while (!valid) {
+            System.out.print(prompt);
+            String inputStr = input.nextLine().trim();
+
+            if (inputStr.isEmpty()) {
+                System.out.println("❌ Harga tidak boleh kosong!");
+                continue;
+            }
+
+            if (!isHargaValid(inputStr)) {
+                System.out.println("❌ Harga harus berupa angka!");
+                continue;
+            }
+
+            hasil = Double.parseDouble(inputStr);
+            if (hasil <= 0) {
+                System.out.println("❌ Harga harus lebih dari 0!");
+                continue;
+            }
+            valid = true;
+        }
+        return hasil;
+    }
+
+    public static boolean inputYesNo(Scanner input, String prompt) {
+        boolean valid = false;
+        boolean hasil = false;
+
+        while (!valid) {
+            System.out.print(prompt);
+            String inputStr = input.nextLine().trim().toLowerCase();
+
+            if (inputStr.equals("y")) {
+                hasil = true;
+                valid = true;
+            } else if (inputStr.equals("n")) {
+                hasil = false;
+                valid = true;
+            } else {
+                System.out.println("❌ Input tidak valid! Masukkan 'y' atau 'n'.");
+            }
+        }
+        return hasil;
+    }
+
+    public static int inputId(Scanner input, String prompt) {
+        int id = 0;
+        boolean valid = false;
+
+        while (!valid) {
+            System.out.print(prompt);
+            String inputId = input.nextLine().trim();
+
+            if (inputId.isEmpty()) {
+                System.out.println("❌ ID tidak boleh kosong!");
+                continue;
+            }
+
+            if (!isAngka(inputId)) {
+                System.out.println("❌ ID harus berupa angka!");
+                continue;
+            }
+
+            id = Integer.parseInt(inputId);
+            valid = true;
+        }
+        return id;
     }
 }
