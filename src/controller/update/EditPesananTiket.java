@@ -1,4 +1,4 @@
-package controller.updade;
+package controller.update;
 
 public class EditPesananTiket {
 }

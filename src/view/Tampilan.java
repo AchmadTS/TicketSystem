@@ -18,7 +18,9 @@ public class Tampilan {
         System.out.println("║  4. ✏️ Edit Penerbangan                         ║");
         System.out.println("║  5. 🗑️ Hapus Penerbangan                        ║");
         System.out.println("║  6. 🎫 Pesan Tiket                              ║");
-        System.out.println("║  7. 📜 Lihat Riwayat Pemesanan                  ║");
+        System.out.println("║  7. ✏️ Edit Pemesanan Tiket                     ║");
+        System.out.println("║  8. 🗑️ Hapus Pemesanan Tiket                    ║");
+        System.out.println("║  9. 📜 Lihat Riwayat Pemesanan                  ║");
         System.out.println("║  0. 🚪 Keluar                                   ║");
         System.out.println("╚═════════════════════════════════════════════════╝");
         System.out.print("➤ Pilih menu: ");

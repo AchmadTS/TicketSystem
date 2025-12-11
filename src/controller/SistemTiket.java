@@ -1,8 +1,8 @@
 package controller;
 
 import controller.create.*;
-import controller.delete.HapusPenerbangan;
-import controller.updade.EditPenerbangan;
+import controller.update.*;
+import controller.delete.*;
 import model.*;
 import view.Tampilan;
 import util.Helper;
@@ -55,7 +55,15 @@ public class SistemTiket {
                     PesanTiket pesan = new PesanTiket(this);
                     pesan.run();
                     break;
-                case "7":
+//                case "7":
+//                    EditPemesananTiket editPemesanan = new EditPemesananTiket(this);
+//                    editPemesanan.run();
+//                    break;
+                case "8":
+                    HapusPesananTiket hapusPemesanan = new HapusPesananTiket(this);
+                    hapusPemesanan.run();
+                    break;
+                case "9":
                     view.showDaftarPemesanan(daftarPemesanan, daftarPenerbangan, jumlahPemesanan, jumlahPenerbangan);
                     break;
                 case "0":

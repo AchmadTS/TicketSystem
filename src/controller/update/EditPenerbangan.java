@@ -1,4 +1,4 @@
-package controller.updade;
+package controller.update;
 
 import controller.SistemTiket;
 import model.Penerbangan;
