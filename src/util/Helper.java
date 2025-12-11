@@ -3,6 +3,9 @@ package util;
 import java.util.Scanner;
 
 public class Helper {
+    /**
+     * Untuk mengkonversi angka bulan (1-12) jadi nama bulan
+     */
     public static String getNamaBulan(int bulan) {
         String namaBulan = "";
         switch (bulan) {
@@ -49,6 +52,9 @@ public class Helper {
         return namaBulan;
     }
 
+    /**
+     * Untuk mengkonversi nama bulan (januari-desember) jadi angka (1-12)
+     */
     public static int getBulanDariNama(String namaBulan) {
         String bulanLower = namaBulan.toLowerCase();
         switch (bulanLower) {
@@ -81,10 +87,16 @@ public class Helper {
         }
     }
 
+    /**
+     * Untuk memformat angka jadi dua digit
+     */
     public static String formatDuaDigit(int angka) {
         return angka < 10 ? "0" + angka : String.valueOf(angka);
     }
 
+    /**
+     * Untuk mengecek apakah string hanya berisi angka (0-9)
+     */
     public static boolean isAngka(String str) {
         if (str == null || str.isEmpty()) {
             return false;
@@ -97,6 +109,9 @@ public class Helper {
         return true;
     }
 
+    /**
+     * Untuk mengecek apakah harga valid
+     */
     public static boolean isHargaValid(String str) {
         if (str == null || str.isEmpty()) {
             return false;
@@ -116,6 +131,9 @@ public class Helper {
         return true;
     }
 
+    /**
+     * Validasi untuk input String yang tidak boleh kosong
+     */
     public static String inputStringWajib(Scanner input, String prompt) {
         String hasil = "";
         while (hasil.isEmpty()) {
@@ -128,6 +146,10 @@ public class Helper {
         return hasil;
     }
 
+    /**
+     * Validasi untuk meminta input integer dalam rentang tertentu dari user
+     * Validasi: input tidak boleh kosong, harus berupa angka, dan harus dalam rentang min-max
+     */
     public static int inputInteger(Scanner input, String prompt, int min, int max) {
         int hasil = 0;
         boolean valid = false;
@@ -156,6 +178,10 @@ public class Helper {
         return hasil;
     }
 
+    /**
+     * Validasi untuk input harga dari user
+     * Validasi: input tidak boleh kosong, harus berupa angka valid, dan harus lebih dari 0
+     */
     public static double inputHarga(Scanner input, String prompt) {
         double hasil = 0;
         boolean valid = false;
@@ -184,6 +210,10 @@ public class Helper {
         return hasil;
     }
 
+    /**
+     * Validasi input konfirmasi Yes/No dari user
+     * Input yang valid: 'y' atau 'n' (case-insensitive)
+     */
     public static boolean inputYesNo(Scanner input, String prompt) {
         boolean valid = false;
         boolean hasil = false;
@@ -205,6 +235,10 @@ public class Helper {
         return hasil;
     }
 
+    /**
+     * Validasi input ID
+     * Validasi: input tidak boleh kosong dan harus berupa angka
+     */
     public static int inputId(Scanner input, String prompt) {
         int id = 0;
         boolean valid = false;
@@ -229,6 +263,16 @@ public class Helper {
         return id;
     }
 
+    /**
+     * Validasi input tanggal lengkap
+     * Format input yang harus: "DD namaBulan YYYY" (contoh: "28 Februari 2025")
+     * Validasi:
+     * - Format harus 3 bagian (hari, bulan, tahun)
+     * - Hari dan tahun harus berupa angka
+     * - Nama bulan harus valid (Januari-Desember)
+     * - Tanggal harus sesuai dengan jumlah hari di bulan tersebut
+     * - Memperhitungkan tahun kabisat untuk Februari
+     */
     public static int[] inputTanggal(Scanner input, String prompt) {
         int hari = 0, bulan = 0, tahun = 0;
         boolean valid = false;
@@ -280,7 +324,7 @@ public class Helper {
 
             valid = true;
         }
-
+        // Return array [hari, bulan, tahun]
         return new int[]{hari, bulan, tahun};
     }
 }
