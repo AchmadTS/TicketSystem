@@ -1,6 +1,7 @@
 package controller.create;
 
 import controller.SistemTiket;
+import util.Helper;
 
 public class TambahPenerbangan {
     private SistemTiket sistem;
@@ -116,49 +117,12 @@ public class TambahPenerbangan {
                 if (inputBenar) {
                     hari = Integer.parseInt(strHari);
                     tahun = Integer.parseInt(strTahun);
-                    switch (namaBulan) {
-                        case "januari":
-                            bulan = 1;
-                            break;
-                        case "februari":
-                            bulan = 2;
-                            break;
-                        case "maret":
-                            bulan = 3;
-                            break;
-                        case "april":
-                            bulan = 4;
-                            break;
-                        case "mei":
-                            bulan = 5;
-                            break;
-                        case "juni":
-                            bulan = 6;
-                            break;
-                        case "juli":
-                            bulan = 7;
-                            break;
-                        case "agustus":
-                            bulan = 8;
-                            break;
-                        case "september":
-                            bulan = 9;
-                            break;
-                        case "oktober":
-                            bulan = 10;
-                            break;
-                        case "november":
-                            bulan = 11;
-                            break;
-                        case "desember":
-                            bulan = 12;
-                            break;
-                        default:
-                            System.out.println("❌ Nama bulan tidak valid!");
-                            inputBenar = false;
-                    }
+                    bulan = Helper.getBulanDariNama(namaBulanAsli);
 
-                    if (inputBenar) {
+                    if (bulan == -1) {
+                        System.out.println("❌ Nama bulan tidak valid!");
+                        inputBenar = false;
+                    } else {
                         int maxHari = 31;
                         if (bulan == 2) {
                             boolean kabisat = (tahun % 4 == 0 && tahun % 100 != 0) || (tahun % 400 == 0);

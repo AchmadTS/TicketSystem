@@ -7,6 +7,7 @@ import controller.updade.EditPenerbangan;
 import model.Penerbangan;
 import model.Pemesanan;
 import view.Tampilan;
+import util.Helper;
 import java.util.Scanner;
 
 public class SistemTiket {
@@ -173,48 +174,7 @@ public class SistemTiket {
 
             hari = Integer.parseInt(strHari);
             tahun = Integer.parseInt(strTahun);
-
-            switch (namaBulan) {
-                case "januari":
-                    bulan = 1;
-                    break;
-                case "februari":
-                    bulan = 2;
-                    break;
-                case "maret":
-                    bulan = 3;
-                    break;
-                case "april":
-                    bulan = 4;
-                    break;
-                case "mei":
-                    bulan = 5;
-                    break;
-                case "juni":
-                    bulan = 6;
-                    break;
-                case "juli":
-                    bulan = 7;
-                    break;
-                case "agustus":
-                    bulan = 8;
-                    break;
-                case "september":
-                    bulan = 9;
-                    break;
-                case "oktober":
-                    bulan = 10;
-                    break;
-                case "november":
-                    bulan = 11;
-                    break;
-                case "desember":
-                    bulan = 12;
-                    break;
-                default:
-                    System.out.println("❌ Nama bulan tidak valid!");
-                    bulan = -1;
-            }
+            bulan = Helper.getBulanDariNama(namaBulan);
 
             if (bulan == -1) continue;
             int maxHari = 31;

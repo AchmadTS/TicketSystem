@@ -47,6 +47,38 @@ public class Helper {
         return namaBulan;
     }
 
+    public static int getBulanDariNama(String namaBulan) {
+        String bulanLower = namaBulan.toLowerCase();
+        switch (bulanLower) {
+            case "januari":
+                return 1;
+            case "februari":
+                return 2;
+            case "maret":
+                return 3;
+            case "april":
+                return 4;
+            case "mei":
+                return 5;
+            case "juni":
+                return 6;
+            case "juli":
+                return 7;
+            case "agustus":
+                return 8;
+            case "september":
+                return 9;
+            case "oktober":
+                return 10;
+            case "november":
+                return 11;
+            case "desember":
+                return 12;
+            default:
+                return -1;
+        }
+    }
+
     public static String formatDuaDigit(int angka) {
         return angka < 10 ? "0" + angka : String.valueOf(angka);
     }
