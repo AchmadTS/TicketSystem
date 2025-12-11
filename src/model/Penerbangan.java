@@ -1,7 +1,6 @@
 package model;
 
 import java.text.DecimalFormat;
-
 import util.Helper;
 
 public class Penerbangan {

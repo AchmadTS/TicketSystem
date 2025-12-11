@@ -61,7 +61,6 @@ public class HapusPenerbangan {
             int idPenerbanganYangDihapus = sistem.daftarPenerbangan[idx].id;
             for (int i = sistem.jumlahPemesanan - 1; i >= 0; i--) {
                 if (sistem.daftarPemesanan[i].idPenerbangan == idPenerbanganYangDihapus) {
-                    // Geser array pemesanan ke kiri
                     for (int j = i; j < sistem.jumlahPemesanan - 1; j++) {
                         sistem.daftarPemesanan[j] = sistem.daftarPemesanan[j + 1];
                     }
