@@ -18,87 +18,23 @@ public class PesanTiket {
         sistem.view.showDaftarPenerbangan(sistem.daftarPenerbangan, sistem.jumlahPenerbangan);
         Penerbangan p = null;
         while (p == null) {
-            int id = 0;
-            boolean idValid = false;
-            while (!idValid) {
-                System.out.print("Masukkan ID penerbangan: ");
-                String inputId = sistem.input.nextLine().trim();
-
-                if (inputId.isEmpty()) {
-                    System.out.println("❌ ID tidak boleh kosong!");
-                    continue;
-                }
-
-                boolean formatValid = true;
-                for (int i = 0; i < inputId.length(); i++) {
-                    char c = inputId.charAt(i);
-                    if (c < '0' || c > '9') {
-                        formatValid = false;
-                        break;
-                    }
-                }
-
-                if (!formatValid) {
-                    System.out.println("❌ ID harus berupa angka!");
-                    continue;
-                }
-
-                id = Integer.parseInt(inputId);
-                idValid = true;
-            }
+            int id = Helper.inputId(sistem.input, "Masukkan ID penerbangan: ");
             p = sistem.cariById(id);
             if (p == null) {
-                System.out.println("❌ Tidak ditemukan");
+                System.out.println("❌ ID Tidak ada");
             }
         }
 
-        String nama = "";
-        while (nama.isEmpty()) {
-            System.out.print("Nama pemesan: ");
-            nama = sistem.input.nextLine().trim();
-            if (nama.isEmpty()) {
-                System.out.println("❌ Nama tidak boleh kosong!");
-            }
-        }
-
+        String nama = Helper.inputStringWajib(sistem.input, "Nama pemesan: ");
         int jumlah = 0;
         boolean jumlahValid = false;
         while (!jumlahValid) {
-            System.out.print("Jumlah tiket: ");
-            String inputJumlah = sistem.input.nextLine().trim();
-
-            if (inputJumlah.isEmpty()) {
-                System.out.println("❌ Jumlah tiket tidak boleh kosong!");
-                continue;
+            jumlah = Helper.inputInteger(sistem.input, "Jumlah tiket: ", 1, Integer.MAX_VALUE);
+            if (jumlah > p.jumlahKursi) {
+                System.out.println("❌ Kursi tidak cukup! Tersedia: " + p.jumlahKursi + " kursi");
+            } else {
+                jumlahValid = true;
             }
-
-            boolean formatValid = true;
-            for (int i = 0; i < inputJumlah.length(); i++) {
-                char c = inputJumlah.charAt(i);
-                if (c < '0' || c > '9') {
-                    formatValid = false;
-                    break;
-                }
-            }
-
-            if (!formatValid) {
-                System.out.println("❌ Jumlah tiket harus berupa angka!");
-                continue;
-            }
-
-            jumlah = Integer.parseInt(inputJumlah);
-
-            if (jumlah <= 0) {
-                System.out.println("❌ Jumlah tiket harus lebih dari 0!");
-                continue;
-            }
-
-            jumlahValid = true;
-        }
-
-        if (jumlah > p.jumlahKursi) {
-            System.out.println("❌ Kursi tidak cukup! Tersedia: " + p.jumlahKursi + " kursi");
-            return;
         }
 
         p.jumlahKursi -= jumlah;
