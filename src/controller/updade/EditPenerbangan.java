@@ -145,59 +145,11 @@ public class EditPenerbangan {
 
         boolean editTanggal = Helper.inputYesNo(sistem.input, "Edit tanggal keberangkatan? (y/n): ");
         if (editTanggal) {
-            int hari = 0, bulan = 0, tahun = 0;
-            boolean valid = false;
+            int[] tanggal = Helper.inputTanggal(sistem.input, "Masukkan waktu baru (contoh: 28 Februari 2024): ");
 
-            while (!valid) {
-                System.out.print("Masukkan waktu baru (contoh: 28 februari 2024): ");
-                String[] waktu = sistem.input.nextLine().split(" ");
-
-                if (waktu.length != 3) {
-                    System.out.println("❌ Format salah! Harus: tanggal bulan tahun");
-                    continue;
-                }
-
-                String strHari = waktu[0];
-                String namaBulanAsli = waktu[1];
-                String strTahun = waktu[2];
-
-                if (!Helper.isAngka(strHari)) {
-                    System.out.println("❌ Tanggal harus angka!");
-                    continue;
-                }
-
-                if (!Helper.isAngka(strTahun)) {
-                    System.out.println("❌ Tahun harus angka!");
-                    continue;
-                }
-
-                hari = Integer.parseInt(strHari);
-                tahun = Integer.parseInt(strTahun);
-                bulan = Helper.getBulanDariNama(namaBulanAsli);
-
-                if (bulan == -1) {
-                    System.out.println("❌ Nama bulan tidak valid!");
-                    continue;
-                }
-
-                int maxHari = 31;
-                if (bulan == 2) {
-                    boolean kabisat = (tahun % 4 == 0 && tahun % 100 != 0) || (tahun % 400 == 0);
-                    maxHari = kabisat ? 29 : 28;
-                } else if (bulan == 4 || bulan == 6 || bulan == 9 || bulan == 11) {
-                    maxHari = 30;
-                }
-
-                if (hari < 1 || hari > maxHari) {
-                    System.out.println("❌ Tanggal tidak valid untuk bulan " + namaBulanAsli + "!");
-                    continue;
-                }
-                valid = true;
-            }
-
-            p.hari = hari;
-            p.bulan = bulan;
-            p.tahun = tahun;
+            p.hari = tanggal[0];
+            p.bulan = tanggal[1];
+            p.tahun = tanggal[2];
 
             p.jam = Helper.inputInteger(sistem.input, "Masukkan jam keberangkatan baru (0-23): ", 0, 23);
             p.menit = Helper.inputInteger(sistem.input, "Masukkan menit keberangkatan baru (0-59): ", 0, 59);

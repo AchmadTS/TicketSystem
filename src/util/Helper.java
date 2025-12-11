@@ -228,4 +228,59 @@ public class Helper {
         }
         return id;
     }
+
+    public static int[] inputTanggal(Scanner input, String prompt) {
+        int hari = 0, bulan = 0, tahun = 0;
+        boolean valid = false;
+
+        while (!valid) {
+            System.out.print(prompt);
+            String[] waktu = input.nextLine().split(" ");
+
+            if (waktu.length != 3) {
+                System.out.println("❌ Format salah! Harus: tanggal bulan tahun");
+                continue;
+            }
+
+            String strHari = waktu[0];
+            String namaBulanAsli = waktu[1];
+            String strTahun = waktu[2];
+
+            if (!isAngka(strHari)) {
+                System.out.println("❌ Tanggal harus angka!");
+                continue;
+            }
+
+            if (!isAngka(strTahun)) {
+                System.out.println("❌ Tahun harus angka!");
+                continue;
+            }
+
+            hari = Integer.parseInt(strHari);
+            tahun = Integer.parseInt(strTahun);
+            bulan = getBulanDariNama(namaBulanAsli);
+
+            if (bulan == -1) {
+                System.out.println("❌ Nama bulan tidak valid!");
+                continue;
+            }
+
+            int maxHari = 31;
+            if (bulan == 2) {
+                boolean kabisat = (tahun % 4 == 0 && tahun % 100 != 0) || (tahun % 400 == 0);
+                maxHari = kabisat ? 29 : 28;
+            } else if (bulan == 4 || bulan == 6 || bulan == 9 || bulan == 11) {
+                maxHari = 30;
+            }
+
+            if (hari < 1 || hari > maxHari) {
+                System.out.println("❌ Tanggal tidak valid untuk bulan " + namaBulanAsli + "!");
+                continue;
+            }
+
+            valid = true;
+        }
+
+        return new int[]{hari, bulan, tahun};
+    }
 }

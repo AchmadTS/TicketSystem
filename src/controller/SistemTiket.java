@@ -1,11 +1,9 @@
 package controller;
 
-import controller.create.PesanTiket;
-import controller.create.TambahPenerbangan;
+import controller.create.*;
 import controller.delete.HapusPenerbangan;
 import controller.updade.EditPenerbangan;
-import model.Penerbangan;
-import model.Pemesanan;
+import model.*;
 import view.Tampilan;
 import util.Helper;
 import java.util.Scanner;
@@ -117,80 +115,13 @@ public class SistemTiket {
         System.out.println("╔═════════════════════════════════════════════════════════╗");
         System.out.println("║                 🔍 CARI PENERBANGAN                     ║");
         System.out.println("╚═════════════════════════════════════════════════════════╝");
-        String asal = "";
-        while (asal.isEmpty()) {
-            System.out.print("Masukkan asal: ");
-            asal = input.nextLine().trim();
-            if (asal.isEmpty()) {
-                System.out.println("❌ Kota asal tidak boleh kosong!");
-            }
-        }
+        String asal = Helper.inputStringWajib(input, "Masukkan asal: ");
+        String tujuan = Helper.inputStringWajib(input, "Masukkan tujuan: ");
 
-        String tujuan = "";
-        while (tujuan.isEmpty()) {
-            System.out.print("Masukkan tujuan: ");
-            tujuan = input.nextLine().trim();
-            if (tujuan.isEmpty()) {
-                System.out.println("❌ Kota tujuan tidak boleh kosong!");
-            }
-        }
-
-        int hari = 0, bulan = 0, tahun = 0;
-        boolean valid = false;
-
-        while (!valid) {
-            System.out.print("Masukkan waktu keberangkatan (contoh: 09 September 2025): ");
-            String waktu = input.nextLine().trim();
-
-            String[] bagian = waktu.split(" ");
-            if (bagian.length != 3) {
-                System.out.println("❌ Format salah! Contoh: 09 September 2025");
-                continue;
-            }
-
-            String strHari = bagian[0];
-            String namaBulan = bagian[1].toLowerCase();
-            String strTahun = bagian[2];
-
-            boolean hariValid = true;
-            for (int i = 0; i < strHari.length(); i++) {
-                if (strHari.charAt(i) < '0' || strHari.charAt(i) > '9') {
-                    System.out.println("❌ Tanggal harus berupa angka!");
-                    hariValid = false;
-                    break;
-                }
-            }
-            if (!hariValid) continue;
-
-            boolean tahunValid = true;
-            for (int i = 0; i < strTahun.length(); i++) {
-                if (strTahun.charAt(i) < '0' || strTahun.charAt(i) > '9') {
-                    System.out.println("❌ Tahun harus berupa angka!");
-                    tahunValid = false;
-                    break;
-                }
-            }
-            if (!tahunValid) continue;
-
-            hari = Integer.parseInt(strHari);
-            tahun = Integer.parseInt(strTahun);
-            bulan = Helper.getBulanDariNama(namaBulan);
-
-            if (bulan == -1) continue;
-            int maxHari = 31;
-            if (bulan == 2) {
-                boolean kabisat = (tahun % 4 == 0 && tahun % 100 != 0) || (tahun % 400 == 0);
-                maxHari = kabisat ? 29 : 28;
-            } else if (bulan == 4 || bulan == 6 || bulan == 9 || bulan == 11) {
-                maxHari = 30;
-            }
-
-            if (hari < 1 || hari > maxHari) {
-                System.out.println("❌ Tanggal tidak valid untuk bulan yang dipilih!");
-                continue;
-            }
-            valid = true;
-        }
+        int[] tanggal = Helper.inputTanggal(input, "Masukkan waktu keberangkatan (contoh: 09 September 2025): ");
+        int hari = tanggal[0];
+        int bulan = tanggal[1];
+        int tahun = tanggal[2];
 
         boolean ketemu = false;
         System.out.println("┌──────────────────────────────────────────────────────────┐");
