@@ -1,7 +1,6 @@
 package view;
 
-import model.Penerbangan;
-import model.Pemesanan;
+import model.*;
 
 public class MenuView {
     public void menuUtama() {

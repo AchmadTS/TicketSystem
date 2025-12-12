@@ -1,6 +1,5 @@
 package controller.create;
 
-import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import controller.SistemTiket;
 import model.Penerbangan;
@@ -42,11 +41,6 @@ public class PesanTiket {
         p.jumlahKursi -= jumlah;
         double total = jumlah * p.harga;
         sistem.daftarPemesanan[sistem.jumlahPemesanan++] = new Pemesanan(sistem.nextIdPemesanan++, p.id, nama, jumlah, total, LocalDateTime.now());
-
-        DecimalFormat df = new DecimalFormat("#,###");
-        String namaBulan = Helper.getNamaBulan(p.bulan);
-        String tanggal = Helper.formatDuaDigit(p.hari) + " " + namaBulan + " " + p.tahun;
-        String waktu = Helper.formatDuaDigit(p.jam) + ":" + Helper.formatDuaDigit(p.menit) + ":00";
         view.showPemesanan(p, nama, jumlah, total);
     }
 }
