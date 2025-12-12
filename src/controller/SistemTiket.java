@@ -4,13 +4,13 @@ import controller.create.*;
 import controller.update.*;
 import controller.delete.*;
 import model.*;
-import view.Tampilan;
+import view.MenuView;
 import util.Helper;
 import java.util.Scanner;
 
 public class SistemTiket {
     public Scanner input = new Scanner(System.in);
-    public Tampilan view = new Tampilan();
+    public MenuView view = new MenuView();
     public Penerbangan[] daftarPenerbangan = new Penerbangan[100];
     public Pemesanan[] daftarPemesanan = new Pemesanan[100];
     public int jumlahPenerbangan = 0;

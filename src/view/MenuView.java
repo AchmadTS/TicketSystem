@@ -3,7 +3,7 @@ package view;
 import model.Penerbangan;
 import model.Pemesanan;
 
-public class Tampilan {
+public class MenuView {
     public void menuUtama() {
         System.out.println();
         System.out.println("╔═════════════════════════════════════════════════╗");
