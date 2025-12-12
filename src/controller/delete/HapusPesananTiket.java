@@ -46,7 +46,7 @@ public class HapusPesananTiket {
         Penerbangan penerbanganTerkait = sistem.cariById(pemesananDihapus.idPenerbangan);
         System.out.println();
         System.out.println("┌──────────────────────────────────────────────────────────┐");
-        System.out.println("│              📋 DETAIL PEMESANAN YANG AKAN DIHAPUS       │");
+        System.out.println("│           📋 DETAIL PEMESANAN YANG AKAN DIHAPUS          │");
         System.out.println("└──────────────────────────────────────────────────────────┘");
         System.out.println("ID Pemesanan  : " + pemesananDihapus.idPemesanan);
         System.out.println("Nama Pemesan  : " + pemesananDihapus.namaPelanggan);
