@@ -3,32 +3,30 @@ package controller.update;
 import controller.SistemTiket;
 import model.*;
 import util.Helper;
-import java.text.DecimalFormat;
+import view.EditPesananView;
 
 public class EditPesananTiket {
     private SistemTiket sistem;
+    private EditPesananView view;
 
     public EditPesananTiket(SistemTiket sistem) {
         this.sistem = sistem;
+        this.view = new EditPesananView();
     }
 
     public void run() {
-        System.out.println();
-        System.out.println("╔═════════════════════════════════════════════════════════╗");
-        System.out.println("║              ✏️  EDIT PEMESANAN TIKET                   ║");
-        System.out.println("╚═════════════════════════════════════════════════════════╝");
-
+        view.showHeader();
         if (sistem.jumlahPemesanan == 0) {
-            System.out.println("\n⚠️ Belum ada pemesanan yang bisa diedit");
+            view.showTidakAdaPemesanan();
             return;
         }
 
         sistem.view.showDaftarPemesanan(sistem.daftarPemesanan, sistem.daftarPenerbangan, sistem.jumlahPemesanan, sistem.jumlahPenerbangan);
         System.out.println();
+
         Pemesanan pemesanan = null;
         while (pemesanan == null) {
             int idPemesanan = Helper.inputId(sistem.input, "Masukkan ID pemesanan yang akan diedit: ");
-
             for (int i = 0; i < sistem.jumlahPemesanan; i++) {
                 if (sistem.daftarPemesanan[i].idPemesanan == idPemesanan) {
                     pemesanan = sistem.daftarPemesanan[i];
@@ -47,22 +45,7 @@ public class EditPesananTiket {
             return;
         }
 
-        DecimalFormat df = new DecimalFormat("#,###");
-        System.out.println();
-        System.out.println("┌──────────────────────────────────────────────────────────┐");
-        System.out.println("│                 📋 DATA PEMESANAN SAAT INI               │");
-        System.out.println("└──────────────────────────────────────────────────────────┘");
-        System.out.println("ID Pemesanan  : " + pemesanan.idPemesanan);
-        System.out.println("Nama Pemesan  : " + pemesanan.namaPelanggan);
-        System.out.println("Jumlah Tiket  : " + pemesanan.jumlah);
-        System.out.println("Harga/Tiket   : Rp" + df.format(penerbanganLama.harga));
-        System.out.println("Total Harga   : Rp" + df.format(pemesanan.totalHarga));
-        System.out.println("ID Penerbangan  : " + penerbanganLama.id);
-        System.out.println("Penerbangan   : " + penerbanganLama.pesawat + " (" + penerbanganLama.asal + " → " + penerbanganLama.tujuan + ")");
-        System.out.println();
-        System.out.println("--- Edit Data ---");
-        System.out.println();
-
+        view.showDataPemesananSaatIni(pemesanan, penerbanganLama);
         System.out.print("Nama pemesan baru [" + pemesanan.namaPelanggan + "]: ");
         String namaBaru = sistem.input.nextLine().trim();
         if (!namaBaru.isEmpty()) {
@@ -70,10 +53,9 @@ public class EditPesananTiket {
         }
 
         boolean gantiPenerbangan = Helper.inputYesNo(sistem.input, "Ganti penerbangan? (y/n): ");
-        Penerbangan penerbanganBaru = penerbanganLama; // Default tetap penerbangan lama
+        Penerbangan penerbanganBaru = penerbanganLama;
         if (gantiPenerbangan) {
-            System.out.println();
-            System.out.println("📋 Daftar Penerbangan Tersedia:");
+            view.showHeaderDaftarPenerbangan();
             sistem.view.showDaftarPenerbangan(sistem.daftarPenerbangan, sistem.jumlahPenerbangan);
             System.out.println();
 
@@ -87,17 +69,18 @@ public class EditPesananTiket {
             }
 
             if (pemesanan.jumlah > p.jumlahKursi) {
-                System.out.println("❌ Kursi tidak cukup di penerbangan baru! Tersedia: " + p.jumlahKursi + " kursi");
-                System.out.println("⚠️ Penerbangan tidak diubah.");
+                view.showKursiTidakCukup(p.jumlahKursi);
             } else {
                 penerbanganLama.jumlahKursi += pemesanan.jumlah;
-                System.out.println("✅ Kursi dikembalikan ke penerbangan lama: +" + pemesanan.jumlah + " kursi");
+                view.showKursiDikembalikan(pemesanan.jumlah);
+
                 p.jumlahKursi -= pemesanan.jumlah;
-                System.out.println("✅ Kursi dipesan dari penerbangan baru: -" + pemesanan.jumlah + " kursi");
+                view.showKursiDipesan(pemesanan.jumlah);
+
                 pemesanan.idPenerbangan = p.id;
                 pemesanan.totalHarga = pemesanan.jumlah * p.harga;
                 penerbanganBaru = p;
-                System.out.println("✅ Penerbangan berhasil diganti!");
+                view.showPenerbanganBerhasilDiganti();
             }
         }
 
@@ -109,45 +92,26 @@ public class EditPesananTiket {
                 int selisih = jumlahBaru - pemesanan.jumlah;
                 if (selisih > 0) {
                     if (selisih > penerbanganBaru.jumlahKursi) {
-                        System.out.println("❌ Kursi tidak cukup! Tersedia: " + penerbanganBaru.jumlahKursi + " kursi");
-                        System.out.println("   Silakan masukkan jumlah yang lebih sedikit.");
+                        view.showKursiTidakCukupEdit(penerbanganBaru.jumlahKursi);
                     } else {
                         penerbanganBaru.jumlahKursi -= selisih;
                         pemesanan.jumlah = jumlahBaru;
                         pemesanan.totalHarga = pemesanan.jumlah * penerbanganBaru.harga;
-                        System.out.println("✅ Jumlah tiket berhasil diperbarui!");
-                        System.out.println("   Kursi penerbangan berkurang: " + selisih + " kursi");
+                        view.showJumlahTiketBerkurang(selisih);
                         jumlahValid = true;
                     }
                 } else if (selisih < 0) {
                     penerbanganBaru.jumlahKursi += Math.abs(selisih);
                     pemesanan.jumlah = jumlahBaru;
                     pemesanan.totalHarga = pemesanan.jumlah * penerbanganBaru.harga;
-                    System.out.println("✅ Jumlah tiket berhasil diperbarui!");
-                    System.out.println("   Kursi penerbangan bertambah: " + Math.abs(selisih) + " kursi");
+                    view.showJumlahTiketBertambah(Math.abs(selisih));
                     jumlahValid = true;
                 } else {
-                    System.out.println("ℹ️  Jumlah tiket tidak berubah.");
+                    view.showJumlahTidakBerubah();
                     jumlahValid = true;
                 }
             }
         }
-
-        System.out.println();
-        System.out.println("╔═════════════════════════════════════════════════════════╗");
-        System.out.println("║          ✅ PEMESANAN BERHASIL DIPERBARUI!              ║");
-        System.out.println("╚═════════════════════════════════════════════════════════╝");
-        System.out.println();
-        System.out.println("┌──────────────────────────────────────────────────────────┐");
-        System.out.println("│                   📋 DATA PEMESANAN BARU                 │");
-        System.out.println("└──────────────────────────────────────────────────────────┘");
-        System.out.println("ID Pemesanan  : " + pemesanan.idPemesanan);
-        System.out.println("Nama Pemesan  : " + pemesanan.namaPelanggan);
-        System.out.println("Jumlah Tiket  : " + pemesanan.jumlah);
-        System.out.println("Harga/Tiket   : Rp" + df.format(penerbanganBaru.harga));
-        System.out.println("Total Harga   : Rp" + df.format(pemesanan.totalHarga));
-        System.out.println("Penerbangan   : " + penerbanganBaru.pesawat + " (" + penerbanganBaru.asal + " → " + penerbanganBaru.tujuan + ")");
-        System.out.println("Kursi Tersedia: " + penerbanganBaru.jumlahKursi);
-        System.out.println("══════════════════════════════════════════════════════════");
+        view.showKonfirmasiUpdate(pemesanan, penerbanganBaru);
     }
 }
