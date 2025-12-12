@@ -26,6 +26,7 @@ public class HapusPesananTiket {
         sistem.view.showDaftarPemesanan(sistem.daftarPemesanan, sistem.daftarPenerbangan, sistem.jumlahPemesanan, sistem.jumlahPenerbangan);
         System.out.println();
 
+        // Cari pemesanan tiket berdasarkan ID
         Pemesanan pemesananDihapus = null;
         int indexPemesanan = -1;
         while (pemesananDihapus == null) {
@@ -43,6 +44,7 @@ public class HapusPesananTiket {
             }
         }
 
+        // Detail pemesanan tiket yang mau dihapus
         Penerbangan penerbanganTerkait = sistem.cariById(pemesananDihapus.idPenerbangan);
         System.out.println();
         System.out.println("┌──────────────────────────────────────────────────────────┐");
@@ -59,6 +61,7 @@ public class HapusPesananTiket {
             System.out.println("ℹ️  Info: " + pemesananDihapus.jumlah + " kursi akan dikembalikan ke penerbangan ini.");
         }
 
+        // Konfirmasi hapus
         System.out.println();
         boolean konfirmasi = Helper.inputYesNo(sistem.input, "⚠️  Yakin ingin menghapus pemesanan ini? (y/n): ");
 
@@ -67,12 +70,14 @@ public class HapusPesananTiket {
             return;
         }
 
+        // Tambahkan kursi ke penerbangan
         if (penerbanganTerkait != null) {
             int kursiSebelum = penerbanganTerkait.jumlahKursi;
             penerbanganTerkait.jumlahKursi += pemesananDihapus.jumlah;
             System.out.println("✅ Kursi dikembalikan: " + kursiSebelum + " → " + penerbanganTerkait.jumlahKursi);
         }
 
+        // Hapus pemesanan tiket
         for (int i = indexPemesanan; i < sistem.jumlahPemesanan - 1; i++) {
             sistem.daftarPemesanan[i] = sistem.daftarPemesanan[i + 1];
         }

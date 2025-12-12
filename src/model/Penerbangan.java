@@ -30,6 +30,7 @@ public class Penerbangan {
         this.jumlahKursi = jumlahKursi;
     }
 
+    // Return informasi penerbangan (string)
     @Override
     public String toString() {
         String namaBulan = Helper.getNamaBulan(this.bulan);

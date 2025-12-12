@@ -23,6 +23,7 @@ public class EditPenerbangan {
             return;
         }
 
+        // Cari penerbangan berdasarkan ID
         System.out.println();
         Penerbangan p = null;
         while (p == null) {
@@ -33,6 +34,7 @@ public class EditPenerbangan {
             }
         }
 
+        // Cek ada/tidak pemesanan tiket ke penerbangan ini
         int jumlahPemesananTerkait = 0;
         for (int i = 0; i < sistem.jumlahPemesanan; i++) {
             if (sistem.daftarPemesanan[i].idPenerbangan == p.id) {
@@ -40,6 +42,7 @@ public class EditPenerbangan {
             }
         }
 
+        // Tampilkan peringatan kalau ada pemesanan tiket ke penerbangan ini
         if (jumlahPemesananTerkait > 0) {
             System.out.println("\n⚠️ PERINGATAN: Ada " + jumlahPemesananTerkait + " pemesanan terkait penerbangan ini!");
             System.out.println("Mengubah data penerbangan akan mempengaruhi pemesanan yang sudah ada.");
@@ -51,6 +54,7 @@ public class EditPenerbangan {
             }
         }
 
+        // Tampilkan data penerbangan sebelum di edit
         System.out.println("┌──────────────────────────────────────────────────────────┐");
         System.out.println("│                 📋 DATA SAAT INI:                        │");
         System.out.println("└──────────────────────────────────────────────────────────┘");
@@ -77,6 +81,7 @@ public class EditPenerbangan {
             p.tujuan = tujuan;
         }
 
+        // Edit harga (harus konfirmasi kalau ada pemesanan tiket ke penerbangan ini)
         DecimalFormat df = new DecimalFormat("#,###");
         double hargaLama = p.harga;
         System.out.print("Harga baru [Rp" + df.format(p.harga) + "]: ");
@@ -87,6 +92,7 @@ public class EditPenerbangan {
                 double hargaBaru = Double.parseDouble(inputHarga);
                 if (hargaBaru > 0) {
                     if (jumlahPemesananTerkait > 0) {
+                    // Preview perubahan total harga pemesanan tiket
                         System.out.println("\n⚠️ PERHATIAN: Perubahan harga akan mempengaruhi " + jumlahPemesananTerkait + " pemesanan pada penerbangan ini!");
                         System.out.println("Harga lama: Rp" + df.format(hargaLama));
                         System.out.println("Harga baru: Rp" + df.format(hargaBaru));
@@ -103,10 +109,12 @@ public class EditPenerbangan {
                             }
                         }
 
+                        // Konfirmasi perubahan harga tiket yang sudah dipesan
                         System.out.println();
                         boolean konfirmasiHarga = Helper.inputYesNo(sistem.input, "⚠️  Yakin ingin mengubah harga dan update semua pemesanan? (y/n): ");
                         if (konfirmasiHarga) {
                             p.harga = hargaBaru;
+                            // Update total harga semua pemesanan tiket di penerbangan ini
                             for (int i = 0; i < sistem.jumlahPemesanan; i++) {
                                 if (sistem.daftarPemesanan[i].idPenerbangan == p.id) {
                                     sistem.daftarPemesanan[i].totalHarga = sistem.daftarPemesanan[i].jumlah * hargaBaru;
@@ -128,6 +136,7 @@ public class EditPenerbangan {
             }
         }
 
+        // Edit jumlah kursi
         System.out.print("Jumlah kursi baru [" + p.jumlahKursi + "]: ");
         String inputKursi = sistem.input.nextLine().trim();
         if (!inputKursi.isEmpty()) {
@@ -143,6 +152,7 @@ public class EditPenerbangan {
             }
         }
 
+        // Edit tanggal keberangkatan (opsional)
         boolean editTanggal = Helper.inputYesNo(sistem.input, "Edit tanggal keberangkatan? (y/n): ");
         if (editTanggal) {
             int[] tanggal = Helper.inputTanggal(sistem.input, "Masukkan waktu baru (contoh: 28 Februari 2024): ");
@@ -155,6 +165,7 @@ public class EditPenerbangan {
             p.menit = Helper.inputInteger(sistem.input, "Masukkan menit keberangkatan baru (0-59): ", 0, 59);
         }
 
+        // Data yang sudah diperbarui
         System.out.println();
         System.out.println("✅ Data berhasil diperbarui!");
         System.out.println("\n📋 Data baru:");

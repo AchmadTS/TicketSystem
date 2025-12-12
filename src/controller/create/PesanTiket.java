@@ -16,7 +16,9 @@ public class PesanTiket {
     }
 
     public void run() {
-        sistem.view.showDaftarPenerbangan(sistem.daftarPenerbangan, sistem.jumlahPenerbangan);
+        sistem.view.showDaftarPenerbangan(sistem.daftarPenerbangan, sistem.jumlahPenerbangan); // Tampilkan daftar penerbangan yang tersedia
+
+        // Validasi input ID penerbangan
         Penerbangan p = null;
         while (p == null) {
             int id = Helper.inputId(sistem.input, "Masukkan ID penerbangan: ");
@@ -26,8 +28,10 @@ public class PesanTiket {
             }
         }
 
-        String nama = Helper.inputStringWajib(sistem.input, "Nama pemesan: ");
+        String nama = Helper.inputStringWajib(sistem.input, "Nama pemesan: "); // Input data pemesan
         int jumlah = 0;
+        // Validasi jumlah tiket dengan ketersediaan kursi
+
         boolean jumlahValid = false;
         while (!jumlahValid) {
             jumlah = Helper.inputInteger(sistem.input, "Jumlah tiket: ", 1, Integer.MAX_VALUE);
@@ -38,6 +42,7 @@ public class PesanTiket {
             }
         }
 
+        // Update kursi & simpan pemesanan
         p.jumlahKursi -= jumlah;
         double total = jumlah * p.harga;
         sistem.daftarPemesanan[sistem.jumlahPemesanan++] = new Pemesanan(sistem.nextIdPemesanan++, p.id, nama, jumlah, total, LocalDateTime.now());

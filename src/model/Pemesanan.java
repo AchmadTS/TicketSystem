@@ -22,6 +22,7 @@ public class Pemesanan {
         this.waktuPesan = waktuPesan;
     }
 
+    // Return ringkasan pemesanan dalam (string)
     public String ringkasan(Penerbangan penerbangan) {
         String infoPenerbangan = "";
         if (penerbangan != null) {
@@ -31,7 +32,7 @@ public class Pemesanan {
             infoPenerbangan = "Penerbangan sudah dihapus";
         }
 
-        String waktu = waktuPesan.getYear() + "-" + Helper.formatDuaDigit(waktuPesan.getMonthValue()) + "-" + Helper.formatDuaDigit(waktuPesan.getDayOfMonth()) + " " + Helper.formatDuaDigit(waktuPesan.getHour()) + ":" + Helper.formatDuaDigit(waktuPesan.getMinute());
+        String waktu = waktuPesan.getYear() + "-" + Helper.formatDuaDigit(waktuPesan.getMonthValue()) + "-" + Helper.formatDuaDigit(waktuPesan.getDayOfMonth()) + " " + Helper.formatDuaDigit(waktuPesan.getHour()) + ":" + Helper.formatDuaDigit(waktuPesan.getMinute()); // Format waktu pemesanan
         DecimalFormat df = new DecimalFormat("#,###");
         return "ID Pesanan #" + idPemesanan
                 + " | Nama: " + namaPelanggan
