@@ -47,7 +47,7 @@ public class HapusPesananTiket {
         System.out.println("ID Pemesanan  : " + pemesananDihapus.idPemesanan);
         System.out.println("Nama Pemesan  : " + pemesananDihapus.namaPelanggan);
         System.out.println("Jumlah Tiket  : " + pemesananDihapus.jumlah);
-        System.out.println("Total Harga   : Rp" + String.format("%,.0f", pemesananDihapus.totalHarga));
+        System.out.printf("Total Harga   : Rp%,.0f%n", pemesananDihapus.totalHarga);
 
         if (penerbanganTerkait != null) {
             System.out.println("Penerbangan   : " + penerbanganTerkait.pesawat + " (" + penerbanganTerkait.asal + " → " + penerbanganTerkait.tujuan + ")");
