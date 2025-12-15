@@ -7,14 +7,8 @@ import view.AddPesananView;
 import util.Helper;
 
 public class PesanTiket {
-    SistemTiket sistemTiket;
-    AddPesananView view;
-    public PesanTiket(SistemTiket sistemTiket) {
-        this.sistemTiket = sistemTiket;
-        this.view = new AddPesananView();
-    }
-
-    public void run() {
+    public static void run(SistemTiket sistemTiket) {
+        AddPesananView view = new AddPesananView();
         sistemTiket.view.showDaftarPenerbangan(sistemTiket.daftarPenerbangan, sistemTiket.jumlahPenerbangan); // Menampilkan daftar penerbangan yang ada
 
         // Validasi input ID penerbangan

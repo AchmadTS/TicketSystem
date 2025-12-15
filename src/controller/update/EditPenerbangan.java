@@ -6,12 +6,7 @@ import util.Helper;
 import java.text.DecimalFormat;
 
 public class EditPenerbangan {
-    private SistemTiket sistemTiket;
-    public EditPenerbangan(SistemTiket sistemTiket) {
-        this.sistemTiket = sistemTiket;
-    }
-
-    public void run() {
+    public static void run(SistemTiket sistemTiket) {
         System.out.println();
         System.out.println("╔═════════════════════════════════════════════════════════╗");
         System.out.println("║                 ✏️ EDIT PENERBANGAN                     ║");

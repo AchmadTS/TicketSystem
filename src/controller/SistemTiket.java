@@ -6,6 +6,7 @@ import controller.delete.*;
 import model.*;
 import view.MenuView;
 import util.Helper;
+
 import java.util.Scanner;
 
 public class SistemTiket {
@@ -38,28 +39,22 @@ public class SistemTiket {
                     cariPenerbangan();
                     break;
                 case "3":
-                    TambahPenerbangan tambah = new TambahPenerbangan(this);
-                    tambah.run();
+                    TambahPenerbangan.run(this);
                     break;
                 case "4":
-                    EditPenerbangan edit = new EditPenerbangan(this);
-                    edit.run();
+                    EditPenerbangan.run(this);
                     break;
                 case "5":
-                    HapusPenerbangan hapus = new HapusPenerbangan(this);
-                    hapus.run();
+                    HapusPenerbangan.run(this);
                     break;
                 case "6":
-                    PesanTiket pesan = new PesanTiket(this);
-                    pesan.run();
+                    PesanTiket.run(this);
                     break;
                 case "7":
-                    EditPesananTiket editPemesanan = new EditPesananTiket(this);
-                    editPemesanan.run();
+                    EditPesananTiket.run(this);
                     break;
                 case "8":
-                    HapusPesananTiket hapusPemesanan = new HapusPesananTiket(this);
-                    hapusPemesanan.run();
+                    HapusPesananTiket.run(this);
                     break;
                 case "9":
                     view.showDaftarPemesanan(daftarPemesanan, daftarPenerbangan, jumlahPemesanan, jumlahPenerbangan);

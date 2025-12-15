@@ -5,13 +5,7 @@ import util.Helper;
 import model.Penerbangan;
 
 public class TambahPenerbangan {
-    private SistemTiket sistemTiket;
-
-    public TambahPenerbangan(SistemTiket sistemTiket) {
-        this.sistemTiket = sistemTiket;
-    }
-
-    public void run() {
+    public static void run(SistemTiket sistemTiket) {
         System.out.println();
         System.out.println("╔═════════════════════════════════════════════════════════╗");
         System.out.println("║                 ➕ TAMBAH PENERBANGAN                   ║");

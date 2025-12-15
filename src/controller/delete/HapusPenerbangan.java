@@ -4,12 +4,7 @@ import controller.SistemTiket;
 import util.Helper;
 
 public class HapusPenerbangan {
-    private SistemTiket sistemTiket;
-    public HapusPenerbangan(SistemTiket sistemTiket) {
-        this.sistemTiket = sistemTiket;
-    }
-
-    public void run() {
+    public static void run(SistemTiket sistemTiket) {
         System.out.println();
         System.out.println("╔═════════════════════════════════════════════════════════╗");
         System.out.println("║                 🗑️ HAPUS PENERBANGAN                    ║");

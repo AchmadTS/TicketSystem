@@ -6,15 +6,8 @@ import util.Helper;
 import view.EditPesananView;
 
 public class EditPesananTiket {
-    private SistemTiket sistemTiket;
-    private EditPesananView view;
-
-    public EditPesananTiket(SistemTiket sistemTiket) {
-        this.sistemTiket = sistemTiket;
-        this.view = new EditPesananView();
-    }
-
-    public void run() {
+    public static void run(SistemTiket sistemTiket) {
+        EditPesananView view = new EditPesananView();
         view.showHeader();
         if (sistemTiket.jumlahPemesanan == 0) {
             view.showTidakAdaPemesanan();

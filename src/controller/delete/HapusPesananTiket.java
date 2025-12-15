@@ -6,13 +6,7 @@ import model.Penerbangan;
 import util.Helper;
 
 public class HapusPesananTiket {
-    private SistemTiket sistemTiket;
-
-    public HapusPesananTiket(SistemTiket sistemTiket) {
-        this.sistemTiket = sistemTiket;
-    }
-
-    public void run() {
+    public static void run(SistemTiket sistemTiket) {
         System.out.println();
         System.out.println("╔═════════════════════════════════════════════════════════╗");
         System.out.println("║              🗑️  HAPUS PEMESANAN TIKET                  ║");
