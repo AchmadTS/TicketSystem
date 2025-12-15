@@ -18,9 +18,7 @@ public class SistemTiket {
     public int nextIdPenerbangan = 1;
     public int nextIdPemesanan = 1;
 
-    /**
-     * Data dummy
-     */
+    // Data dummy
     public void isiContohPenerbangan() {
         daftarPenerbangan[jumlahPenerbangan++] = new Penerbangan(nextIdPenerbangan++, "Garuda 101", "Jakarta", "Surabaya", 750000, 10, 10, 2025, 8, 30, 100);
         daftarPenerbangan[jumlahPenerbangan++] = new Penerbangan(nextIdPenerbangan++, "Lion Air 202", "Jakarta", "Bali", 650000, 11, 12, 2025, 14, 45, 120);
@@ -76,12 +74,10 @@ public class SistemTiket {
         }
     }
 
-    /**
-     * Menampilkan daftar penerbangan yang terurut berdasarkan waktu keberangkatan
-     * Sorting dari awal ke akhir (ascending)
-     * Urutan prioritas: tahun → bulan → hari → jam → menit
-     * Algoritma Bubble Sort
-     */
+    // Menampilkan daftar penerbangan yang terurut berdasarkan waktu keberangkatan
+    // Sorting awal ke akhir (ascending)
+    // Urutan: tahun → bulan → hari → jam → menit
+    // Algoritma Bubble Sort
     public void urutanPenerbanganSementara() {
         if (jumlahPenerbangan == 0) {
             System.out.println("\n⚠️ Belum ada data penerbangan.");
@@ -127,10 +123,8 @@ public class SistemTiket {
         view.showDaftarPenerbangan(salinan, jumlahPenerbangan);
     }
 
-    /**
-     * Mencari penerbangan berdasarkan: Kota asal, Kota tujuan, waktu keberangkatan
-     * Pencarian case-insensitive untuk asal dan tujuan
-     */
+    // Mencari penerbangan berdasarkan: Kota asal, Kota tujuan, waktu keberangkatan
+    // Pencarian case-insensitive untuk asal dan tujuan
     public void cariPenerbangan() {
         System.out.println();
         System.out.println("╔═════════════════════════════════════════════════════════╗");
@@ -160,9 +154,7 @@ public class SistemTiket {
         }
     }
 
-    /**
-     * Cari penerbangan berdasarkan ID
-     */
+    // Cari penerbangan berdasarkan ID
     public Penerbangan cariById(int id) {
         for (int i = 0; i < jumlahPenerbangan; i++) {
             if (daftarPenerbangan[i] != null && daftarPenerbangan[i].id == id) {

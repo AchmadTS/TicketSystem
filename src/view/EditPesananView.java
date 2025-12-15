@@ -13,16 +13,13 @@ public class EditPesananView {
         System.out.println("╚═════════════════════════════════════════════════════════╝");
     }
 
-    /**
-     * Pesan jika belum ada pemesanan
-     */
+
+    // Pesan jika belum ada pemesanan
     public void showTidakAdaPemesanan() {
         System.out.println("\n⚠️ Belum ada pemesanan yang bisa diedit");
     }
 
-    /**
-     * Data pemesanan sebelum di-edit
-     */
+    // Data pemesanan sebelum diedit
     public void showDataPemesananSaatIni(Pemesanan pemesanan, Penerbangan penerbangan) {
         System.out.println();
         System.out.println("┌──────────────────────────────────────────────────────────┐");
@@ -45,69 +42,51 @@ public class EditPesananView {
         System.out.println("📋 Daftar Penerbangan Tersedia:");
     }
 
-    /**
-     * Pesan error ketika kursi tidak cukup
-     */
+    // Pesan error saat kursi tidak cukup
     public void showKursiTidakCukup(int kursiTersedia) {
         System.out.println("❌ Kursi tidak cukup di penerbangan baru! Tersedia: " + kursiTersedia + " kursi");
         System.out.println("⚠️ Penerbangan tidak diubah.");
     }
 
-    /**
-     * Konfirmasi kursi dikembalikan ke penerbangan lama
-     */
+    // Konfirmasi kursi dibalikkan ke penerbangan lama
     public void showKursiDikembalikan(int jumlahKursi) {
         System.out.println("✅ Kursi dikembalikan ke penerbangan lama: +" + jumlahKursi + " kursi");
     }
 
-    /**
-     * Konfirmasi kursi dipesan dari penerbangan baru
-     */
+    // Konfirmasi kursi dipesan dari penerbangan baru
     public void showKursiDipesan(int jumlahKursi) {
         System.out.println("✅ Kursi dipesan dari penerbangan baru: -" + jumlahKursi + " kursi");
     }
 
-    /**
-     * Konfirmasi penerbangan berhasil diganti
-     */
+    // Konfirmasi penerbangan berhasil diganti
     public void showPenerbanganBerhasilDiganti() {
         System.out.println("✅ Penerbangan berhasil diganti!");
     }
 
-    /**
-     * Kursi tidak cukup saat edit jumlah
-     */
+    // Kursi tidak cukup ketika edit jumlah tiket
     public void showKursiTidakCukupEdit(int kursiTersedia) {
         System.out.println("❌ Kursi tidak cukup! Tersedia: " + kursiTersedia + " kursi");
         System.out.println("   Silakan masukkan jumlah yang lebih sedikit.");
     }
 
-    /**
-     * Konfirmasi jumlah tiket berhasil diperbarui (berkurang)
-     */
+    // Konfirmasi jumlah tiket berhasil diperbarui (berkurang)
     public void showJumlahTiketBerkurang(int selisih) {
         System.out.println("✅ Jumlah tiket berhasil diperbarui!");
         System.out.println("   Kursi penerbangan berkurang: " + selisih + " kursi");
     }
 
-    /**
-     * Konfirmasi jumlah tiket berhasil diperbarui (bertambah)
-     */
+    // Konfirmasi jumlah tiket berhasil diperbarui (bertambah)
     public void showJumlahTiketBertambah(int selisih) {
         System.out.println("✅ Jumlah tiket berhasil diperbarui!");
         System.out.println("   Kursi penerbangan bertambah: " + selisih + " kursi");
     }
 
-    /**
-     * Pesan jumlah tiket tidak berubah
-     */
+    // Pesan jumlah tiket tidak berubah
     public void showJumlahTidakBerubah() {
         System.out.println("ℹ️  Jumlah tiket tidak berubah.");
     }
 
-    /**
-     * Konfirmasi pemesanan berhasil diperbarui dan data baru
-     */
+    // Konfirmasi pesanan berhasil diperbarui & data baru
     public void showKonfirmasiUpdate(Pemesanan pemesanan, Penerbangan penerbangan) {
         System.out.println();
         System.out.println("╔═════════════════════════════════════════════════════════╗");

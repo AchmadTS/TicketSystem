@@ -6,9 +6,9 @@ import util.Helper;
 import java.text.DecimalFormat;
 
 public class EditPenerbangan {
-    private SistemTiket sistem;
-    public EditPenerbangan(SistemTiket sistem) {
-        this.sistem = sistem;
+    private SistemTiket sistemTiket;
+    public EditPenerbangan(SistemTiket sistemTiket) {
+        this.sistemTiket = sistemTiket;
     }
 
     public void run() {
@@ -16,9 +16,9 @@ public class EditPenerbangan {
         System.out.println("╔═════════════════════════════════════════════════════════╗");
         System.out.println("║                 ✏️ EDIT PENERBANGAN                     ║");
         System.out.println("╚═════════════════════════════════════════════════════════╝");
-        sistem.view.showDaftarPenerbangan(sistem.daftarPenerbangan, sistem.jumlahPenerbangan);
+        sistemTiket.view.showDaftarPenerbangan(sistemTiket.daftarPenerbangan, sistemTiket.jumlahPenerbangan);
 
-        if (sistem.jumlahPenerbangan == 0) {
+        if (sistemTiket.jumlahPenerbangan == 0) {
             System.out.println("\n⚠️ Belum ada penerbangan yang bisa diedit");
             return;
         }
@@ -27,8 +27,8 @@ public class EditPenerbangan {
         System.out.println();
         Penerbangan p = null;
         while (p == null) {
-            int id = Helper.inputId(sistem.input, "Masukkan ID penerbangan yang akan diedit: ");
-            p = sistem.cariById(id);
+            int id = Helper.inputId(sistemTiket.input, "Masukkan ID penerbangan yang akan diedit: ");
+            p = sistemTiket.cariById(id);
             if (p == null) {
                 System.out.println("❌ ID penerbangan tidak ada! Silakan coba lagi");
             }
@@ -36,8 +36,8 @@ public class EditPenerbangan {
 
         // Cek ada/tidak pemesanan tiket ke penerbangan ini
         int jumlahPemesananTerkait = 0;
-        for (int i = 0; i < sistem.jumlahPemesanan; i++) {
-            if (sistem.daftarPemesanan[i].idPenerbangan == p.id) {
+        for (int i = 0; i < sistemTiket.jumlahPemesanan; i++) {
+            if (sistemTiket.daftarPemesanan[i].idPenerbangan == p.id) {
                 jumlahPemesananTerkait++;
             }
         }
@@ -47,8 +47,8 @@ public class EditPenerbangan {
             System.out.println("\n⚠️ PERINGATAN: Ada " + jumlahPemesananTerkait + " pemesanan terkait penerbangan ini!");
             System.out.println("Mengubah data penerbangan akan mempengaruhi pemesanan yang sudah ada.");
 
-            boolean lanjutkan = Helper.inputYesNo(sistem.input, "Lanjutkan edit? (y/n): ");
-            if (!lanjutkan) {
+            boolean lanjut = Helper.inputYesNo(sistemTiket.input, "Lanjutkan edit? (y/n): ");
+            if (!lanjut) {
                 System.out.println("❌ Edit dibatalkan.");
                 return;
             }
@@ -64,19 +64,19 @@ public class EditPenerbangan {
         System.out.println();
 
         System.out.print("Nama pesawat baru [" + p.pesawat + "]: ");
-        String pesawat = sistem.input.nextLine().trim();
+        String pesawat = sistemTiket.input.nextLine().trim();
         if (!pesawat.isEmpty()) {
             p.pesawat = pesawat;
         }
 
         System.out.print("Asal baru [" + p.asal + "]: ");
-        String asal = sistem.input.nextLine().trim();
+        String asal = sistemTiket.input.nextLine().trim();
         if (!asal.isEmpty()) {
             p.asal = asal;
         }
 
         System.out.print("Tujuan baru [" + p.tujuan + "]: ");
-        String tujuan = sistem.input.nextLine().trim();
+        String tujuan = sistemTiket.input.nextLine().trim();
         if (!tujuan.isEmpty()) {
             p.tujuan = tujuan;
         }
@@ -85,7 +85,7 @@ public class EditPenerbangan {
         DecimalFormat df = new DecimalFormat("#,###");
         double hargaLama = p.harga;
         System.out.print("Harga baru [Rp" + df.format(p.harga) + "]: ");
-        String inputHarga = sistem.input.nextLine().trim();
+        String inputHarga = sistemTiket.input.nextLine().trim();
 
         if (!inputHarga.isEmpty()) {
             if (Helper.isHargaValid(inputHarga)) {
@@ -101,23 +101,23 @@ public class EditPenerbangan {
                         System.out.println("│       📋 PREVIEW PERUBAHAN TOTAL HARGA PEMESANAN:        │");
                         System.out.println("└──────────────────────────────────────────────────────────┘");
 
-                        for (int i = 0; i < sistem.jumlahPemesanan; i++) {
-                            if (sistem.daftarPemesanan[i].idPenerbangan == p.id) {
-                                double totalLama = sistem.daftarPemesanan[i].totalHarga;
-                                double totalBaru = sistem.daftarPemesanan[i].jumlah * hargaBaru;
-                                System.out.println("• Pemesanan #" + sistem.daftarPemesanan[i].idPemesanan + " (" + sistem.daftarPemesanan[i].namaPelanggan + ") | " + "Rp" + df.format(totalLama) + " → Rp" + df.format(totalBaru));
+                        for (int i = 0; i < sistemTiket.jumlahPemesanan; i++) {
+                            if (sistemTiket.daftarPemesanan[i].idPenerbangan == p.id) {
+                                double totalLama = sistemTiket.daftarPemesanan[i].totalHarga;
+                                double totalBaru = sistemTiket.daftarPemesanan[i].jumlah * hargaBaru;
+                                System.out.println("• Pemesanan #" + sistemTiket.daftarPemesanan[i].idPemesanan + " (" + sistemTiket.daftarPemesanan[i].namaPelanggan + ") | " + "Rp" + df.format(totalLama) + " → Rp" + df.format(totalBaru));
                             }
                         }
 
                         // Konfirmasi perubahan harga tiket yang sudah dipesan
                         System.out.println();
-                        boolean konfirmasiHarga = Helper.inputYesNo(sistem.input, "⚠️  Yakin ingin mengubah harga dan update semua pemesanan? (y/n): ");
+                        boolean konfirmasiHarga = Helper.inputYesNo(sistemTiket.input, "⚠️  Yakin ingin mengubah harga dan update semua pemesanan? (y/n): ");
                         if (konfirmasiHarga) {
                             p.harga = hargaBaru;
                             // Update total harga semua pemesanan tiket di penerbangan ini
-                            for (int i = 0; i < sistem.jumlahPemesanan; i++) {
-                                if (sistem.daftarPemesanan[i].idPenerbangan == p.id) {
-                                    sistem.daftarPemesanan[i].totalHarga = sistem.daftarPemesanan[i].jumlah * hargaBaru;
+                            for (int i = 0; i < sistemTiket.jumlahPemesanan; i++) {
+                                if (sistemTiket.daftarPemesanan[i].idPenerbangan == p.id) {
+                                    sistemTiket.daftarPemesanan[i].totalHarga = sistemTiket.daftarPemesanan[i].jumlah * hargaBaru;
                                 }
                             }
                             System.out.println("✅ Harga penerbangan dan total harga pemesanan berhasil diperbarui!");
@@ -138,7 +138,7 @@ public class EditPenerbangan {
 
         // Edit jumlah kursi
         System.out.print("Jumlah kursi baru [" + p.jumlahKursi + "]: ");
-        String inputKursi = sistem.input.nextLine().trim();
+        String inputKursi = sistemTiket.input.nextLine().trim();
         if (!inputKursi.isEmpty()) {
             if (Helper.isAngka(inputKursi)) {
                 int kursiBaru = Integer.parseInt(inputKursi);
@@ -153,16 +153,16 @@ public class EditPenerbangan {
         }
 
         // Edit tanggal keberangkatan (opsional)
-        boolean editTanggal = Helper.inputYesNo(sistem.input, "Edit tanggal keberangkatan? (y/n): ");
+        boolean editTanggal = Helper.inputYesNo(sistemTiket.input, "Edit tanggal keberangkatan? (y/n): ");
         if (editTanggal) {
-            int[] tanggal = Helper.inputTanggal(sistem.input, "Masukkan waktu baru (contoh: 28 Februari 2024): ");
+            int[] tanggal = Helper.inputTanggal(sistemTiket.input, "Masukkan waktu baru (contoh: 28 Februari 2024): ");
 
             p.hari = tanggal[0];
             p.bulan = tanggal[1];
             p.tahun = tanggal[2];
 
-            p.jam = Helper.inputInteger(sistem.input, "Masukkan jam keberangkatan baru (0-23): ", 0, 23);
-            p.menit = Helper.inputInteger(sistem.input, "Masukkan menit keberangkatan baru (0-59): ", 0, 59);
+            p.jam = Helper.inputInteger(sistemTiket.input, "Masukkan jam keberangkatan baru (0-23): ", 0, 23);
+            p.menit = Helper.inputInteger(sistemTiket.input, "Masukkan menit keberangkatan baru (0-59): ", 0, 59);
         }
 
         // Data yang sudah diperbarui

@@ -3,9 +3,7 @@ package util;
 import java.util.Scanner;
 
 public class Helper {
-    /**
-     * Untuk mengkonversi angka bulan (1-12) jadi nama bulan
-     */
+    // Untuk konversi angka bulan (1-12) jadi nama bulan
     public static String getNamaBulan(int bulan) {
         String namaBulan = "";
         switch (bulan) {
@@ -52,9 +50,7 @@ public class Helper {
         return namaBulan;
     }
 
-    /**
-     * Untuk mengkonversi nama bulan (januari-desember) jadi angka (1-12)
-     */
+    // Untuk mengkonversi nama bulan (januari-desember) jadi angka (1-12)
     public static int getBulanDariNama(String namaBulan) {
         String bulanLower = namaBulan.toLowerCase();
         switch (bulanLower) {
@@ -87,16 +83,12 @@ public class Helper {
         }
     }
 
-    /**
-     * Untuk memformat angka jadi dua digit
-     */
+    // Untuk memformat angka jadi dua digit
     public static String formatDuaDigit(int angka) {
         return angka < 10 ? "0" + angka : String.valueOf(angka);
     }
 
-    /**
-     * Untuk mengecek apakah string hanya berisi angka (0-9)
-     */
+    // Untuk mengecek apakah string hanya berisi angka (0-9)
     public static boolean isAngka(String str) {
         if (str == null || str.isEmpty()) {
             return false;
@@ -109,9 +101,7 @@ public class Helper {
         return true;
     }
 
-    /**
-     * Untuk mengecek apakah harga valid
-     */
+    // Untuk mengecek apakah harga valid
     public static boolean isHargaValid(String str) {
         if (str == null || str.isEmpty()) {
             return false;
@@ -131,9 +121,7 @@ public class Helper {
         return true;
     }
 
-    /**
-     * Validasi untuk input String yang tidak boleh kosong
-     */
+    //Validasi untuk input String yang tidak boleh kosong
     public static String inputStringWajib(Scanner input, String prompt) {
         String hasil = "";
         while (hasil.isEmpty()) {
@@ -146,10 +134,8 @@ public class Helper {
         return hasil;
     }
 
-    /**
-     * Validasi untuk meminta input integer dalam rentang tertentu dari user
-     * Validasi: input tidak boleh kosong, harus berupa angka, dan harus dalam rentang min-max
-     */
+    // Validasi untuk meminta input integer dalam rentang tertentu dari user
+    // Validasi: input tidak boleh kosong, harus berupa angka, dan harus dalam rentang min-max
     public static int inputInteger(Scanner input, String prompt, int min, int max) {
         int hasil = 0;
         boolean valid = false;
@@ -178,10 +164,8 @@ public class Helper {
         return hasil;
     }
 
-    /**
-     * Validasi untuk input harga dari user
-     * Validasi: input tidak boleh kosong, harus berupa angka valid, dan harus lebih dari 0
-     */
+    // Validasi untuk input harga dari user
+    // Validasi: input tidak boleh kosong, harus berupa angka valid, dan harus lebih dari 0
     public static double inputHarga(Scanner input, String prompt) {
         double hasil = 0;
         boolean valid = false;
@@ -210,10 +194,8 @@ public class Helper {
         return hasil;
     }
 
-    /**
-     * Validasi input konfirmasi Yes/No dari user
-     * Input yang valid: 'y' atau 'n' (case-insensitive)
-     */
+    // Validasi input konfirmasi Yes/No dari user
+    // Input yang valid: 'y' atau 'n' (case-insensitive)
     public static boolean inputYesNo(Scanner input, String prompt) {
         boolean valid = false;
         boolean hasil = false;
@@ -229,16 +211,14 @@ public class Helper {
                 hasil = false;
                 valid = true;
             } else {
-                System.out.println("❌ Input tidak valid! Masukkan 'y' atau 'n'.");
+                System.out.println("❌ Input tidak valid! Masukkan 'y' atau 'n'");
             }
         }
         return hasil;
     }
 
-    /**
-     * Validasi input ID
-     * Validasi: input tidak boleh kosong dan harus berupa angka
-     */
+    // Validasi input ID
+    // Validasi: input tidak boleh kosong dan harus berupa angka
     public static int inputId(Scanner input, String prompt) {
         int id = 0;
         boolean valid = false;
@@ -263,18 +243,16 @@ public class Helper {
         return id;
     }
 
-    /**
-     * Validasi input tanggal lengkap
-     * Format input yang harus: "DD namaBulan YYYY" (contoh: "28 Februari 2025")
-     * Validasi:
-     * - Format harus 3 bagian (hari, bulan, tahun)
-     * - Hari dan tahun harus berupa angka
-     * - Nama bulan harus valid (Januari-Desember)
-     * - Tanggal harus sesuai dengan jumlah hari di bulan tersebut
-     * - Memperhitungkan tahun kabisat untuk Februari
-     */
+    // Validasi input tanggal lengkap
+    // Contoh format input: "DD namaBulan YYYY" (contoh: "28 Februari 2025")
+    // Validasi:
+    // - Format harus 3 bagian (tanggal, bulan, tahun)
+    // - Tanggal dan tahun harus int
+    // - Nama bulan harus valid (Januari-Desember)
+    // - Tanggal harus sesuai jumlah tanggal di bulan tersebut
+    // - Memperhitungkan tahun kabisat untuk Februari
     public static int[] inputTanggal(Scanner input, String prompt) {
-        int hari = 0, bulan = 0, tahun = 0;
+        int tanggal = 0, bulan = 0, tahun = 0;
         boolean valid = false;
 
         while (!valid) {
@@ -286,11 +264,11 @@ public class Helper {
                 continue;
             }
 
-            String strHari = waktu[0];
-            String namaBulanAsli = waktu[1];
+            String strTanggal = waktu[0];
+            String namaBulan = waktu[1];
             String strTahun = waktu[2];
 
-            if (!isAngka(strHari)) {
+            if (!isAngka(strTanggal)) {
                 System.out.println("❌ Tanggal harus angka!");
                 continue;
             }
@@ -300,31 +278,31 @@ public class Helper {
                 continue;
             }
 
-            hari = Integer.parseInt(strHari);
+            tanggal = Integer.parseInt(strTanggal);
             tahun = Integer.parseInt(strTahun);
-            bulan = getBulanDariNama(namaBulanAsli);
+            bulan = getBulanDariNama(namaBulan);
 
             if (bulan == -1) {
                 System.out.println("❌ Nama bulan tidak valid!");
                 continue;
             }
 
-            int maxHari = 31;
+            int maxTanggal = 31;
             if (bulan == 2) {
                 boolean kabisat = (tahun % 4 == 0 && tahun % 100 != 0) || (tahun % 400 == 0);
-                maxHari = kabisat ? 29 : 28;
+                maxTanggal = kabisat ? 29 : 28;
             } else if (bulan == 4 || bulan == 6 || bulan == 9 || bulan == 11) {
-                maxHari = 30;
+                maxTanggal = 30;
             }
 
-            if (hari < 1 || hari > maxHari) {
-                System.out.println("❌ Tanggal tidak valid untuk bulan " + namaBulanAsli + "!");
+            if (tanggal < 1 || tanggal > maxTanggal) {
+                System.out.println("❌ Tanggal tidak valid untuk bulan " + namaBulan + "!");
                 continue;
             }
 
             valid = true;
         }
         // Return array [hari, bulan, tahun]
-        return new int[]{hari, bulan, tahun};
+        return new int[]{tanggal, bulan, tahun};
     }
 }
