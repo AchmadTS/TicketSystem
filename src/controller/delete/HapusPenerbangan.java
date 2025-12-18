@@ -16,7 +16,7 @@ public class HapusPenerbangan {
             return;
         }
 
-        /** Cari penerbangan berdasarkan ID */
+        // Cari penerbangan berdasarkan ID
         System.out.println();
         int idx = -1;
         while (idx == -1) {
@@ -33,14 +33,14 @@ public class HapusPenerbangan {
             }
         }
 
-        /** Data penerbangan yang akan dihapus */
+        // Data penerbangan yang akan dihapus
         System.out.println("┌──────────────────────────────────────────────────────────┐");
         System.out.println("│          🗑️ DATA PENERBANGAN YANG AKAN DIHAPUS           │");
         System.out.println("└──────────────────────────────────────────────────────────┘");
         System.out.println(sistemTiket.daftarPenerbangan[idx]);
         System.out.println();
 
-        /** Hitung jumlah pemesanan tiket yang terhubung ke penerbangan ini */
+        // Hitung jumlah pemesanan tiket yang terhubung ke penerbangan ini
         int jumlahPemesananTerkait = 0;
         for (int i = 0; i < sistemTiket.jumlahPemesanan; i++) {
             if (sistemTiket.daftarPemesanan[i].idPenerbangan == sistemTiket.daftarPenerbangan[idx].id) {
@@ -48,19 +48,19 @@ public class HapusPenerbangan {
             }
         }
 
-        /** Peringatan jika ada pemesanan tiket yang terhubung ke penerbangan yang akan dihapus */
+        // Peringatan jika ada pemesanan tiket yang terhubung ke penerbangan yang akan dihapus
         if (jumlahPemesananTerkait > 0) {
             System.out.println("⚠️ PERINGATAN: Ada " + jumlahPemesananTerkait + " pemesanan tiket di penerbangan ini!");
             System.out.println("Data pemesanan tiket akan ikut terhapus!");
             System.out.println();
         }
 
-        /** Konfirmasi hapus */
+        // Konfirmasi hapus
         boolean konfirmasi = Helper.inputYesNo(sistemTiket.input, "⚠️  Yakin ingin menghapus penerbangan ini? (y/n): ");
         if (konfirmasi) {
             int idPenerbanganYangDihapus = sistemTiket.daftarPenerbangan[idx].id;
 
-            /** Hapus semua pemesanan tiket yang terhubung ke penerbangan ini  */
+            // Hapus semua pemesanan tiket yang terhubung ke penerbangan ini
             for (int i = sistemTiket.jumlahPemesanan - 1; i >= 0; i--) {
                 if (sistemTiket.daftarPemesanan[i].idPenerbangan == idPenerbanganYangDihapus) {
                     for (int j = i; j < sistemTiket.jumlahPemesanan - 1; j++) {
@@ -70,7 +70,7 @@ public class HapusPenerbangan {
                 }
             }
 
-            /** Hapus penerbangan */
+            // Hapus penerbangan
             for (int i = idx; i < sistemTiket.jumlahPenerbangan - 1; i++) {
                 sistemTiket.daftarPenerbangan[i] = sistemTiket.daftarPenerbangan[i + 1];
             }
