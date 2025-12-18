@@ -25,7 +25,9 @@ public class MenuView {
         System.out.print("➤ Pilih menu: ");
     }
 
-    // Daftar penerbangan yang tersedia
+    /**
+     * Daftar penerbangan yang tersedia
+     */
     public void showDaftarPenerbangan(Penerbangan[] daftar, int jumlah) {
         if (jumlah == 0) {
             System.out.println("\n⚠️ Belum ada penerbangan");
@@ -40,7 +42,9 @@ public class MenuView {
         }
     }
 
-    // Riwayat pemesanan tiket
+    /**
+     * Riwayat pemesanan tiket
+     */
     public void showDaftarPemesanan(Pemesanan[] daftar, Penerbangan[] penerbangan, int jumlahPesan, int jumlahTerbang) {
         if (jumlahPesan == 0) {
             System.out.println("\n⚠️ Belum ada pemesanan");
@@ -51,12 +55,12 @@ public class MenuView {
         System.out.println("║                 📜 RIWAYAT PEMESANAN                    ║");
         System.out.println("╚═════════════════════════════════════════════════════════╝");
 
-        // Tampilkan setiap pemesanan + data penerbangannya
+        /** Tampilkan setiap pemesanan + data penerbangannya */
         for (int i = 0; i < jumlahPesan; i++) {
             Pemesanan pem = daftar[i];
             Penerbangan p = null;
 
-            // Cari penerbangan yang terhubung ke pesanan
+            /** Cari penerbangan yang terhubung ke pesanan */
             for (int j = 0; j < jumlahTerbang; j++) {
                 if (penerbangan[j].id == pem.idPenerbangan) {
                     p = penerbangan[j];

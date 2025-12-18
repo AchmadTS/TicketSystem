@@ -2,10 +2,12 @@ package view;
 
 import model.Pemesanan;
 import model.Penerbangan;
+
 import java.text.DecimalFormat;
 
 public class EditPesananView {
     private DecimalFormat df = new DecimalFormat("#,###");
+
     public void showHeader() {
         System.out.println();
         System.out.println("╔═════════════════════════════════════════════════════════╗");
@@ -14,12 +16,16 @@ public class EditPesananView {
     }
 
 
-    // Pesan jika belum ada pemesanan
+    /**
+     * Pesan jika belum ada pemesanan
+     */
     public void showTidakAdaPemesanan() {
         System.out.println("\n⚠️ Belum ada pemesanan yang bisa diedit");
     }
 
-    // Data pemesanan sebelum diedit
+    /**
+     * Data pemesanan sebelum diedit
+     */
     public void showDataPemesananSaatIni(Pemesanan pemesanan, Penerbangan penerbangan) {
         System.out.println();
         System.out.println("┌──────────────────────────────────────────────────────────┐");
@@ -42,51 +48,69 @@ public class EditPesananView {
         System.out.println("📋 Daftar Penerbangan Tersedia:");
     }
 
-    // Pesan error saat kursi tidak cukup
+    /**
+     * Pesan error saat kursi tidak cukup
+     */
     public void showKursiTidakCukup(int kursiTersedia) {
         System.out.println("❌ Kursi tidak cukup di penerbangan baru! Tersedia: " + kursiTersedia + " kursi");
         System.out.println("⚠️ Penerbangan tidak diubah.");
     }
 
-    // Konfirmasi kursi dibalikkan ke penerbangan lama
+    /**
+     * Konfirmasi kursi dibalikkan ke penerbangan lama
+     */
     public void showKursiDikembalikan(int jumlahKursi) {
         System.out.println("✅ Kursi dikembalikan ke penerbangan lama: +" + jumlahKursi + " kursi");
     }
 
-    // Konfirmasi kursi dipesan dari penerbangan baru
+    /**
+     * Konfirmasi kursi dipesan dari penerbangan baru
+     */
     public void showKursiDipesan(int jumlahKursi) {
         System.out.println("✅ Kursi dipesan dari penerbangan baru: -" + jumlahKursi + " kursi");
     }
 
-    // Konfirmasi penerbangan berhasil diganti
+    /**
+     * Konfirmasi penerbangan berhasil diganti
+     */
     public void showPenerbanganBerhasilDiganti() {
         System.out.println("✅ Penerbangan berhasil diganti!");
     }
 
-    // Kursi tidak cukup ketika edit jumlah tiket
+    /**
+     * Kursi tidak cukup ketika edit jumlah tiket
+     */
     public void showKursiTidakCukupEdit(int kursiTersedia) {
         System.out.println("❌ Kursi tidak cukup! Tersedia: " + kursiTersedia + " kursi");
         System.out.println("   Silakan masukkan jumlah yang lebih sedikit.");
     }
 
-    // Konfirmasi jumlah tiket berhasil diperbarui (berkurang)
+    /**
+     * Konfirmasi jumlah tiket berhasil diperbarui (berkurang)
+     */
     public void showJumlahTiketBerkurang(int selisih) {
         System.out.println("✅ Jumlah tiket berhasil diperbarui!");
         System.out.println("   Kursi penerbangan berkurang: " + selisih + " kursi");
     }
 
-    // Konfirmasi jumlah tiket berhasil diperbarui (bertambah)
+    /**
+     * Konfirmasi jumlah tiket berhasil diperbarui (bertambah)
+     */
     public void showJumlahTiketBertambah(int selisih) {
         System.out.println("✅ Jumlah tiket berhasil diperbarui!");
         System.out.println("   Kursi penerbangan bertambah: " + selisih + " kursi");
     }
 
-    // Pesan jumlah tiket tidak berubah
+    /**
+     * Pesan jumlah tiket tidak berubah
+     */
     public void showJumlahTidakBerubah() {
         System.out.println("ℹ️  Jumlah tiket tidak berubah.");
     }
 
-    // Konfirmasi pesanan berhasil diperbarui & data baru
+    /**
+     * Konfirmasi pesanan berhasil diperbarui & data baru
+     */
     public void showKonfirmasiUpdate(Pemesanan pemesanan, Penerbangan penerbangan) {
         System.out.println();
         System.out.println("╔═════════════════════════════════════════════════════════╗");

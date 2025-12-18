@@ -2,6 +2,7 @@ package model;
 
 import java.text.DecimalFormat;
 import java.time.LocalDateTime;
+
 import util.Helper;
 
 public class Pemesanan {
@@ -21,7 +22,9 @@ public class Pemesanan {
         this.waktuPesan = waktuPesan;
     }
 
-    // Return ringkasan pemesanan dalam (string)
+    /**
+     * Return ringkasan pemesanan dalam (string)
+     */
     public String ringkasan(Penerbangan penerbangan) {
         String infoPenerbangan = "";
         if (penerbangan != null) {

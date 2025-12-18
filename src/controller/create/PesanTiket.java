@@ -1,6 +1,7 @@
 package controller.create;
 
 import java.time.LocalDateTime;
+
 import controller.SistemTiket;
 import model.*;
 import view.AddPesananView;
@@ -11,7 +12,7 @@ public class PesanTiket {
         AddPesananView view = new AddPesananView();
         sistemTiket.view.showDaftarPenerbangan(sistemTiket.daftarPenerbangan, sistemTiket.jumlahPenerbangan); // Menampilkan daftar penerbangan yang ada
 
-        // Validasi input ID penerbangan
+        /** Validasi input ID penerbangan */
         Penerbangan penerbangan = null;
         while (penerbangan == null) {
             int id = Helper.inputId(sistemTiket.input, "ID penerbangan: ");
@@ -24,7 +25,7 @@ public class PesanTiket {
         String nama = Helper.inputStringWajib(sistemTiket.input, "Nama pemesan: "); // Input data pemesan
         int jumlah = 0;
 
-        // Validasi jumlah tiket dengan kursi tersedia
+        /** Validasi jumlah tiket dengan kursi tersedia */
         boolean jumlahValid = false;
         while (!jumlahValid) {
             jumlah = Helper.inputInteger(sistemTiket.input, "Jumlah tiket: ", 1, Integer.MAX_VALUE);
@@ -35,7 +36,7 @@ public class PesanTiket {
             }
         }
 
-        // Update kursi & simpan pemesanan
+        /** Update kursi & simpan pemesanan */
         penerbangan.jumlahKursi -= jumlah;
         double total = jumlah * penerbangan.harga;
         sistemTiket.daftarPemesanan[sistemTiket.jumlahPemesanan++] = new Pemesanan(sistemTiket.nextIdPemesanan++, penerbangan.id, nama, jumlah, total, LocalDateTime.now());

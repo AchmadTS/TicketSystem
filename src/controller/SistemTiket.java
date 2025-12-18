@@ -33,7 +33,7 @@ public class SistemTiket {
 
             switch (pilih) {
                 case "1":
-                    urutanPenerbanganSementara();
+                    bubbleSortPenerbangan();
                     break;
                 case "2":
                     cariPenerbangan();
@@ -73,7 +73,7 @@ public class SistemTiket {
     // Sorting awal ke akhir (ascending)
     // Urutan: tahun → bulan → hari → jam → menit
     // Algoritma Bubble Sort
-    public void urutanPenerbanganSementara() {
+    public void bubbleSortPenerbangan() {
         if (jumlahPenerbangan == 0) {
             System.out.println("\n⚠️ Belum ada data penerbangan.");
             return;
