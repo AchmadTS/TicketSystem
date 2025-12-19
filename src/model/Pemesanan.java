@@ -29,7 +29,7 @@ public class Pemesanan {
         String infoPenerbangan = "";
         if (penerbangan != null) {
             String namaBulan = Helper.getNamaBulan(penerbangan.bulan);
-            infoPenerbangan = "#" + penerbangan.id + " " + penerbangan.pesawat + " " + penerbangan.asal + " -> " + penerbangan.tujuan + " (" + penerbangan.hari + " " + namaBulan + " " + penerbangan.tahun + ")";
+            infoPenerbangan = "#" + penerbangan.id + " " + penerbangan.pesawat + " " + penerbangan.asal + " -> " + penerbangan.tujuan + " (" + penerbangan.tanggal + " " + namaBulan + " " + penerbangan.tahun + ")";
         } else {
             infoPenerbangan = "Penerbangan sudah dihapus";
         }

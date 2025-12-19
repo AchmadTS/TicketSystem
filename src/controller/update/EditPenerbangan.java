@@ -153,7 +153,7 @@ public class EditPenerbangan {
         if (editTanggal) {
             int[] tanggal = Helper.inputTanggal(sistemTiket.input, "Masukkan waktu baru (contoh: 28 Februari 2024): ");
 
-            p.hari = tanggal[0];
+            p.tanggal = tanggal[0];
             p.bulan = tanggal[1];
             p.tahun = tanggal[2];
 

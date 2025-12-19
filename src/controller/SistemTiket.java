@@ -99,9 +99,9 @@ public class SistemTiket {
                     if (p1.bulan > p2.bulan) { // bandingin bulan
                         tukar = true;
                     } else if (p1.bulan == p2.bulan) {
-                        if (p1.hari > p2.hari) { // bandingin hari
+                        if (p1.tanggal > p2.tanggal) { // bandingin tanggal
                             tukar = true;
-                        } else if (p1.hari == p2.hari) {
+                        } else if (p1.tanggal == p2.tanggal) {
                             if (p1.jam > p2.jam) { // bandingin jam
                                 tukar = true;
                             } else if (p1.jam == p2.jam) {
@@ -134,10 +134,10 @@ public class SistemTiket {
         String asal = Helper.inputStringWajib(input, "Masukkan asal: ");
         String tujuan = Helper.inputStringWajib(input, "Masukkan tujuan: ");
 
-        int[] tanggal = Helper.inputTanggal(input, "Masukkan waktu keberangkatan (contoh: 09 September 2025): ");
-        int hari = tanggal[0];
-        int bulan = tanggal[1];
-        int tahun = tanggal[2];
+        int[] waktu = Helper.inputTanggal(input, "Masukkan waktu keberangkatan (contoh: 09 September 2025): ");
+        int tanggal = waktu[0];
+        int bulan = waktu[1];
+        int tahun = waktu[2];
 
         boolean ketemu = false;
         System.out.println("┌──────────────────────────────────────────────────────────┐");
@@ -145,7 +145,7 @@ public class SistemTiket {
         System.out.println("└──────────────────────────────────────────────────────────┘");
         for (int i = 0; i < jumlahPenerbangan; i++) {
             Penerbangan p = daftarPenerbangan[i];
-            if (p.asal.equalsIgnoreCase(asal) && p.tujuan.equalsIgnoreCase(tujuan) && p.hari == hari && p.bulan == bulan && p.tahun == tahun) {
+            if (p.asal.equalsIgnoreCase(asal) && p.tujuan.equalsIgnoreCase(tujuan) && p.tanggal == tanggal && p.bulan == bulan && p.tahun == tahun) {
                 System.out.println(p);
                 ketemu = true;
             }

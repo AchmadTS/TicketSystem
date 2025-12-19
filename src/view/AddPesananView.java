@@ -8,7 +8,7 @@ public class AddPesananView {
     public void showPemesanan(Penerbangan p, String nama, int jumlah, double total) {
         DecimalFormat df = new DecimalFormat("#,###");
         String namaBulan = Helper.getNamaBulan(p.bulan);
-        String tanggal = Helper.formatDuaDigit(p.hari) + " " + namaBulan + " " + p.tahun;
+        String tanggal = Helper.formatDuaDigit(p.tanggal) + " " + namaBulan + " " + p.tahun;
         String waktu = Helper.formatDuaDigit(p.jam) + ":" + Helper.formatDuaDigit(p.menit) + ":00";
 
         System.out.println();

@@ -10,19 +10,19 @@ public class Penerbangan {
     public String tujuan;
     public double harga;
     public int bulan;
-    public int hari;
+    public int tanggal;
     public int tahun;
     public int jam;
     public int menit;
     public int jumlahKursi;
 
-    public Penerbangan(int id, String pesawat, String asal, String tujuan, double harga, int hari, int bulan, int tahun, int jam, int menit, int jumlahKursi) {
+    public Penerbangan(int id, String pesawat, String asal, String tujuan, double harga, int tanggal, int bulan, int tahun, int jam, int menit, int jumlahKursi) {
         this.id = id;
         this.pesawat = pesawat;
         this.asal = asal;
         this.tujuan = tujuan;
         this.harga = harga;
-        this.hari = hari;
+        this.tanggal = tanggal;
         this.bulan = bulan;
         this.tahun = tahun;
         this.jam = jam;
@@ -39,7 +39,7 @@ public class Penerbangan {
         return "ID:" + id +
                 " | " + pesawat +
                 " | " + asal + " -> " + tujuan +
-                " | " + Helper.formatDuaDigit(hari) + " " + namaBulan + " " + tahun + " " + waktu +
+                " | " + Helper.formatDuaDigit(tanggal) + " " + namaBulan + " " + tahun + " " + waktu +
                 " | Harga: Rp" + df.format(harga) +
                 " | Kursi: " + jumlahKursi;
     }
