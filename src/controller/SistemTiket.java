@@ -92,26 +92,13 @@ public class SistemTiket {
             for (int j = i + 1; j < jumlahPenerbangan; j++) {
                 Penerbangan p1 = salinan[i];
                 Penerbangan p2 = salinan[j];
-                boolean tukar = false;
-                if (p1.tahun > p2.tahun) { // bandingin tahun
-                    tukar = true;
-                } else if (p1.tahun == p2.tahun) {
-                    if (p1.bulan > p2.bulan) { // bandingin bulan
-                        tukar = true;
-                    } else if (p1.bulan == p2.bulan) {
-                        if (p1.tanggal > p2.tanggal) { // bandingin tanggal
-                            tukar = true;
-                        } else if (p1.tanggal == p2.tanggal) {
-                            if (p1.jam > p2.jam) { // bandingin jam
-                                tukar = true;
-                            } else if (p1.jam == p2.jam) {
-                                if (p1.menit > p2.menit) { // bandingin menit
-                                    tukar = true;
-                                }
-                            }
-                        }
-                    }
-                }
+
+                boolean tukar = (p1.tahun > p2.tahun) ||
+                        (p1.tahun == p2.tahun && p1.bulan > p2.bulan) ||
+                        (p1.tahun == p2.tahun && p1.bulan == p2.bulan && p1.tanggal > p2.tanggal) ||
+                        (p1.tahun == p2.tahun && p1.bulan == p2.bulan && p1.tanggal == p2.tanggal && p1.jam > p2.jam) ||
+                        (p1.tahun == p2.tahun && p1.bulan == p2.bulan && p1.tanggal == p2.tanggal && p1.jam == p2.jam && p1.menit > p2.menit);
+
                 if (tukar) {
                     Penerbangan temp = salinan[i];
                     salinan[i] = salinan[j];
