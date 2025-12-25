@@ -93,11 +93,7 @@ public class SistemTiket {
                 Penerbangan p1 = salinan[i];
                 Penerbangan p2 = salinan[j];
 
-                boolean tukar = (p1.tahun > p2.tahun) ||
-                        (p1.tahun == p2.tahun && p1.bulan > p2.bulan) ||
-                        (p1.tahun == p2.tahun && p1.bulan == p2.bulan && p1.tanggal > p2.tanggal) ||
-                        (p1.tahun == p2.tahun && p1.bulan == p2.bulan && p1.tanggal == p2.tanggal && p1.jam > p2.jam) ||
-                        (p1.tahun == p2.tahun && p1.bulan == p2.bulan && p1.tanggal == p2.tanggal && p1.jam == p2.jam && p1.menit > p2.menit);
+                boolean tukar = (p1.tahun > p2.tahun) || (p1.tahun == p2.tahun && p1.bulan > p2.bulan) || (p1.tahun == p2.tahun && p1.bulan == p2.bulan && p1.tanggal > p2.tanggal) || (p1.tahun == p2.tahun && p1.bulan == p2.bulan && p1.tanggal == p2.tanggal && p1.jam > p2.jam) || (p1.tahun == p2.tahun && p1.bulan == p2.bulan && p1.tanggal == p2.tanggal && p1.jam == p2.jam && p1.menit > p2.menit);
 
                 if (tukar) {
                     Penerbangan temp = salinan[i];
@@ -122,17 +118,13 @@ public class SistemTiket {
         String tujuan = Helper.inputStringWajib(input, "Masukkan tujuan: ");
 
         int[] waktu = Helper.inputTanggal(input, "Masukkan waktu keberangkatan (contoh: 09 September 2025): ");
-        int tanggal = waktu[0];
-        int bulan = waktu[1];
-        int tahun = waktu[2];
-
-        boolean ketemu = false;
         System.out.println("┌──────────────────────────────────────────────────────────┐");
         System.out.println("│                 🔍 HASIL PENCARIAN                       │");
         System.out.println("└──────────────────────────────────────────────────────────┘");
+        boolean ketemu = false;
         for (int i = 0; i < jumlahPenerbangan; i++) {
             Penerbangan p = daftarPenerbangan[i];
-            if (p.asal.equalsIgnoreCase(asal) && p.tujuan.equalsIgnoreCase(tujuan) && p.tanggal == tanggal && p.bulan == bulan && p.tahun == tahun) {
+            if (p.asal.equalsIgnoreCase(asal) && p.tujuan.equalsIgnoreCase(tujuan) && p.tanggal == waktu[0] && p.bulan == waktu[1] && p.tahun == waktu[2]) {
                 System.out.println(p);
                 ketemu = true;
             }
