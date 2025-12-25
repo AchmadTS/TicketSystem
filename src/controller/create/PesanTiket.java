@@ -22,19 +22,14 @@ public class PesanTiket {
             }
         }
 
-        String nama = Helper.inputStringWajib(sistemTiket.input, "Nama pemesan: "); // Input data pemesan
-        int jumlah = 0;
-
-        // Validasi jumlah tiket dengan kursi tersedia
-        boolean jumlahValid = false;
-        while (!jumlahValid) {
-            jumlah = Helper.inputInteger(sistemTiket.input, "Jumlah tiket: ", 1, Integer.MAX_VALUE);
-            if (jumlah > penerbangan.jumlahKursi) {
-                System.out.println("❌ Kursi tidak cukup! Tersedia: " + penerbangan.jumlahKursi + " kursi");
-            } else {
-                jumlahValid = true;
-            }
+        // Cek apakah masih ada kursi tersedia
+        if (penerbangan.jumlahKursi == 0) {
+            System.out.println("❌ Maaf, penerbangan ini sudah penuh. Tidak ada kursi tersedia.");
+            return;
         }
+
+        String nama = Helper.inputStringWajib(sistemTiket.input, "Nama pemesan: ");
+        int jumlah = Helper.inputInteger(sistemTiket.input, "Jumlah tiket (max " + penerbangan.jumlahKursi + "): ", 1, penerbangan.jumlahKursi);
 
         // Update kursi & simpan pemesanan
         penerbangan.jumlahKursi -= jumlah;
