@@ -14,7 +14,7 @@ public class TambahPenerbangan {
         String pesawat = Helper.inputStringWajib(sistemTiket.input, "Nama pesawat: ");
         String asal = Helper.inputStringWajib(sistemTiket.input, "Asal: ");
         String tujuan = Helper.inputStringWajib(sistemTiket.input, "Tujuan: ");
-        double harga = Helper.inputHarga(sistemTiket.input, "Harga: ");
+        int harga = Helper.inputInteger(sistemTiket.input, "Harga: ", 1, Integer.MAX_VALUE);
 
         int[] waktu = Helper.inputTanggal(sistemTiket.input, "Masukkan waktu (contoh: 28 Februari 2024): ");
         int jam = Helper.inputInteger(sistemTiket.input, "Masukkan jam keberangkatan (0-23): ", 0, 23);

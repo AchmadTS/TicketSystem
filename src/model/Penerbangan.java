@@ -8,7 +8,7 @@ public class Penerbangan {
     public String pesawat;
     public String asal;
     public String tujuan;
-    public double harga;
+    public int harga;
     public int bulan;
     public int tanggal;
     public int tahun;
@@ -16,7 +16,7 @@ public class Penerbangan {
     public int menit;
     public int jumlahKursi;
 
-    public Penerbangan(int id, String pesawat, String asal, String tujuan, double harga, int tanggal, int bulan, int tahun, int jam, int menit, int jumlahKursi) {
+    public Penerbangan(int id, String pesawat, String asal, String tujuan, int harga, int tanggal, int bulan, int tahun, int jam, int menit, int jumlahKursi) {
         this.id = id;
         this.pesawat = pesawat;
         this.asal = asal;

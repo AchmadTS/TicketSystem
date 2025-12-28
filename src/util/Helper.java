@@ -157,38 +157,6 @@ public class Helper {
     }
 
     /**
-     * Validasi untuk input harga dari user
-     * Validasi: input tidak boleh kosong, harus berupa angka valid, dan harus lebih dari 0
-     */
-    public static double inputHarga(Scanner input, String prompt) {
-        double hasil = 0;
-        boolean valid = false;
-
-        while (!valid) {
-            System.out.print(prompt);
-            String inputStr = input.nextLine().trim();
-
-            if (inputStr.isEmpty()) {
-                System.out.println("❌ Harga tidak boleh kosong!");
-                continue;
-            }
-
-            if (!isAngka(inputStr)) {
-                System.out.println("❌ Harga harus berupa angka!");
-                continue;
-            }
-
-            hasil = Double.parseDouble(inputStr);
-            if (hasil <= 0) {
-                System.out.println("❌ Harga harus lebih dari 0!");
-                continue;
-            }
-            valid = true;
-        }
-        return hasil;
-    }
-
-    /**
      * Validasi input konfirmasi Yes/No dari user
      * Input yang valid: 'y' atau 'n' (case-insensitive)
      */
@@ -245,11 +213,11 @@ public class Helper {
      * Validasi input tanggal lengkap
      * Contoh format input: "DD namaBulan YYYY" (contoh: "28 Februari 2025")
      * Validasi:
-     *  - Format harus 3 bagian (tanggal, bulan, tahun)
-     *  - Tanggal dan tahun harus int
-     *  - Nama bulan harus valid (Januari-Desember)
-     *  - Tanggal harus sesuai jumlah tanggal di bulan tersebut
-     *  - Memperhitungkan tahun kabisat untuk Februari
+     * - Format harus 3 bagian (tanggal, bulan, tahun)
+     * - Tanggal dan tahun harus int
+     * - Nama bulan harus valid (Januari-Desember)
+     * - Tanggal harus sesuai jumlah tanggal di bulan tersebut
+     * - Memperhitungkan tahun kabisat untuk Februari
      */
     public static int[] inputTanggal(Scanner input, String prompt) {
         int tanggal = 0, bulan = 0, tahun = 0;

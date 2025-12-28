@@ -10,10 +10,10 @@ public class Pemesanan {
     public int idPenerbangan;
     public String namaPelanggan;
     public int jumlah;
-    public double totalHarga;
+    public int totalHarga;
     LocalDateTime waktuPesan;
 
-    public Pemesanan(int idPemesanan, int idPenerbangan, String namaPelanggan, int jumlah, double totalHarga, LocalDateTime waktuPesan) {
+    public Pemesanan(int idPemesanan, int idPenerbangan, String namaPelanggan, int jumlah, int totalHarga, LocalDateTime waktuPesan) {
         this.idPemesanan = idPemesanan;
         this.idPenerbangan = idPenerbangan;
         this.namaPelanggan = namaPelanggan;

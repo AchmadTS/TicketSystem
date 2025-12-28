@@ -33,7 +33,7 @@ public class PesanTiket {
 
         // Update kursi & simpan pemesanan
         penerbangan.jumlahKursi -= jumlah;
-        double total = jumlah * penerbangan.harga;
+        int total = jumlah * penerbangan.harga;
         sistemTiket.daftarPemesanan[sistemTiket.jumlahPemesanan++] = new Pemesanan(sistemTiket.nextIdPemesanan++, penerbangan.id, nama, jumlah, total, LocalDateTime.now());
         view.showPemesanan(penerbangan, nama, jumlah, total);
     }

@@ -79,13 +79,13 @@ public class EditPenerbangan {
 
         // Edit harga (harus konfirmasi kalau ada pemesanan tiket ke penerbangan ini)
         DecimalFormat df = new DecimalFormat("#,###");
-        double hargaLama = p.harga;
+        int hargaLama = p.harga;
         System.out.print("Harga baru [Rp" + df.format(p.harga) + "]: ");
         String inputHarga = sistemTiket.input.nextLine().trim();
 
         if (!inputHarga.isEmpty()) {
             if (Helper.isAngka(inputHarga)) {
-                double hargaBaru = Double.parseDouble(inputHarga);
+                int hargaBaru = Integer.parseInt(inputHarga);
                 if (hargaBaru > 0) {
                     if (jumlahPemesananTerkait > 0) {
                         // Preview perubahan total harga pemesanan tiket
@@ -99,8 +99,8 @@ public class EditPenerbangan {
 
                         for (int i = 0; i < sistemTiket.jumlahPemesanan; i++) {
                             if (sistemTiket.daftarPemesanan[i].idPenerbangan == p.id) {
-                                double totalLama = sistemTiket.daftarPemesanan[i].totalHarga;
-                                double totalBaru = sistemTiket.daftarPemesanan[i].jumlah * hargaBaru;
+                                int totalLama = sistemTiket.daftarPemesanan[i].totalHarga;
+                                int totalBaru = sistemTiket.daftarPemesanan[i].jumlah * hargaBaru;
                                 System.out.println("• Pemesanan #" + sistemTiket.daftarPemesanan[i].idPemesanan + " (" + sistemTiket.daftarPemesanan[i].namaPelanggan + ") | " + "Rp" + df.format(totalLama) + " → Rp" + df.format(totalBaru));
                             }
                         }
