@@ -110,28 +110,6 @@ public class Helper {
     }
 
     /**
-     * Untuk mengecek apakah harga valid
-     */
-    public static boolean isHargaValid(String str) {
-        if (str == null || str.isEmpty()) {
-            return false;
-        }
-        int jumlahTitik = 0;
-        for (int i = 0; i < str.length(); i++) {
-            char c = str.charAt(i);
-            if (c == '.') {
-                jumlahTitik++;
-                if (jumlahTitik > 1) {
-                    return false;
-                }
-            } else if (c < '0' || c > '9') {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    /**
      * Validasi untuk input String yang tidak boleh kosong
      */
     public static String inputStringWajib(Scanner input, String prompt) {
@@ -195,7 +173,7 @@ public class Helper {
                 continue;
             }
 
-            if (!isHargaValid(inputStr)) {
+            if (!isAngka(inputStr)) {
                 System.out.println("❌ Harga harus berupa angka!");
                 continue;
             }

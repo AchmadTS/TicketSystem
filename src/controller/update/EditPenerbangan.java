@@ -84,7 +84,7 @@ public class EditPenerbangan {
         String inputHarga = sistemTiket.input.nextLine().trim();
 
         if (!inputHarga.isEmpty()) {
-            if (Helper.isHargaValid(inputHarga)) {
+            if (Helper.isAngka(inputHarga)) {
                 double hargaBaru = Double.parseDouble(inputHarga);
                 if (hargaBaru > 0) {
                     if (jumlahPemesananTerkait > 0) {
